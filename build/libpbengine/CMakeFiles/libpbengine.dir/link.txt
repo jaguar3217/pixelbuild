@@ -1,0 +1,2 @@
+/bin/ar qc liblibpbengine.a  CMakeFiles/libpbengine.dir/libpbengine.cpp.o
+/bin/ranlib liblibpbengine.a

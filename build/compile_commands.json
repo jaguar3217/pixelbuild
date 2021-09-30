@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/jaguar3217/pixelbuild/build/libpbengine",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/jaguar3217/pixelbuild/libpbengine  -g   -o CMakeFiles/libpbengine.dir/libpbengine.cpp.o -c /home/jaguar3217/pixelbuild/libpbengine/libpbengine.cpp",
+  "file": "/home/jaguar3217/pixelbuild/libpbengine/libpbengine.cpp"
+},
+{
+  "directory": "/home/jaguar3217/pixelbuild/build/pbclient",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/jaguar3217/pixelbuild/libpbengine  -g   -o CMakeFiles/pbclient.dir/main.cpp.o -c /home/jaguar3217/pixelbuild/pbclient/main.cpp",
+  "file": "/home/jaguar3217/pixelbuild/pbclient/main.cpp"
+}
+]

@@ -9,7 +9,8 @@
 					"childIndexes" : 
 					[
 						1,
-						2
+						2,
+						3
 					],
 					"minimumCMakeVersion" : 
 					{
@@ -45,6 +46,20 @@
 					[
 						1
 					]
+				},
+				{
+					"build" : "pbserverd",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8.11"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "pbserverd",
+					"targetIndexes" : 
+					[
+						2
+					]
 				}
 			],
 			"name" : "Debug",
@@ -55,13 +70,15 @@
 					[
 						0,
 						1,
-						2
+						2,
+						3
 					],
 					"name" : "Pixelbuild",
 					"targetIndexes" : 
 					[
 						0,
-						1
+						1,
+						2
 					]
 				}
 			],
@@ -77,8 +94,15 @@
 				{
 					"directoryIndex" : 2,
 					"id" : "pbclient::@4a49c3fbc2250ff93dfb",
-					"jsonFile" : "target-pbclient-Debug-a9df5c9f191afcd986b2.json",
+					"jsonFile" : "target-pbclient-Debug-d0f2b710538f35413cac.json",
 					"name" : "pbclient",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 3,
+					"id" : "pbserverd::@93b00f1b9b8484ca8d15",
+					"jsonFile" : "target-pbserverd-Debug-126221dd58468b74cb10.json",
+					"name" : "pbserverd",
 					"projectIndex" : 0
 				}
 			]

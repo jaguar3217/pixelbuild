@@ -8,5 +8,10 @@
   "directory": "/home/jaguar3217/pixelbuild/build/pbclient",
   "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/jaguar3217/pixelbuild/libpbengine  -g   -o CMakeFiles/pbclient.dir/main.cpp.o -c /home/jaguar3217/pixelbuild/pbclient/main.cpp",
   "file": "/home/jaguar3217/pixelbuild/pbclient/main.cpp"
+},
+{
+  "directory": "/home/jaguar3217/pixelbuild/build/pbserverd",
+  "command": "/bin/x86_64-linux-gnu-g++-9   -I/home/jaguar3217/pixelbuild/libpbengine  -g   -o CMakeFiles/pbserverd.dir/main.cpp.o -c /home/jaguar3217/pixelbuild/pbserverd/main.cpp",
+  "file": "/home/jaguar3217/pixelbuild/pbserverd/main.cpp"
 }
 ]

@@ -6,3 +6,6 @@
 /home/jaguar3217/pixelbuild/build/pbclient/CMakeFiles/rebuild_cache.dir
 /home/jaguar3217/pixelbuild/build/pbclient/CMakeFiles/edit_cache.dir
 /home/jaguar3217/pixelbuild/build/pbclient/CMakeFiles/pbclient.dir
+/home/jaguar3217/pixelbuild/build/pbserverd/CMakeFiles/rebuild_cache.dir
+/home/jaguar3217/pixelbuild/build/pbserverd/CMakeFiles/edit_cache.dir
+/home/jaguar3217/pixelbuild/build/pbserverd/CMakeFiles/pbserverd.dir

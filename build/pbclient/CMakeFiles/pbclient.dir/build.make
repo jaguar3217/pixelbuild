@@ -80,6 +80,10 @@ pbclient_EXTERNAL_OBJECTS =
 pbclient/pbclient: pbclient/CMakeFiles/pbclient.dir/main.cpp.o
 pbclient/pbclient: pbclient/CMakeFiles/pbclient.dir/build.make
 pbclient/pbclient: libpbengine/liblibpbengine.a
+pbclient/pbclient: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1
+pbclient/pbclient: /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1
+pbclient/pbclient: /usr/lib/x86_64-linux-gnu/libsfml-network.so.2.5.1
+pbclient/pbclient: /usr/lib/x86_64-linux-gnu/libsfml-system.so.2.5.1
 pbclient/pbclient: pbclient/CMakeFiles/pbclient.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/jaguar3217/pixelbuild/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable pbclient"
 	cd /home/jaguar3217/pixelbuild/build/pbclient && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/pbclient.dir/link.txt --verbose=$(VERBOSE)

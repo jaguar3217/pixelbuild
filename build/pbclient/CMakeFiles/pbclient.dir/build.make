@@ -79,7 +79,7 @@ pbclient_EXTERNAL_OBJECTS =
 
 pbclient/pbclient: pbclient/CMakeFiles/pbclient.dir/main.cpp.o
 pbclient/pbclient: pbclient/CMakeFiles/pbclient.dir/build.make
-pbclient/pbclient: libpbengine/liblibpbengine.a
+pbclient/pbclient: pbengine/libpbengine.a
 pbclient/pbclient: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1
 pbclient/pbclient: /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1
 pbclient/pbclient: /usr/lib/x86_64-linux-gnu/libsfml-network.so.2.5.1

@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/jaguar3217/pixelbuild/build/CMakeFiles /home/jaguar3217/pixelbuild/build/CMakeFiles/progress.marks
-	$(MAKE) -f CMakeFiles/Makefile2 all
+	cd /home/jaguar3217/pixelbuild/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/jaguar3217/pixelbuild/build/CMakeFiles /home/jaguar3217/pixelbuild/build/pbengine/CMakeFiles/progress.marks
+	cd /home/jaguar3217/pixelbuild/build && $(MAKE) -f CMakeFiles/Makefile2 pbengine/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jaguar3217/pixelbuild/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	$(MAKE) -f CMakeFiles/Makefile2 clean
+	cd /home/jaguar3217/pixelbuild/build && $(MAKE) -f CMakeFiles/Makefile2 pbengine/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,57 +97,60 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /home/jaguar3217/pixelbuild/build && $(MAKE) -f CMakeFiles/Makefile2 pbengine/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	$(MAKE) -f CMakeFiles/Makefile2 preinstall
+	cd /home/jaguar3217/pixelbuild/build && $(MAKE) -f CMakeFiles/Makefile2 pbengine/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/jaguar3217/pixelbuild/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
-#=============================================================================
-# Target rules for targets named pbengine
+# Convenience name for target.
+pbengine/CMakeFiles/pbengine.dir/rule:
+	cd /home/jaguar3217/pixelbuild/build && $(MAKE) -f CMakeFiles/Makefile2 pbengine/CMakeFiles/pbengine.dir/rule
+.PHONY : pbengine/CMakeFiles/pbengine.dir/rule
 
-# Build rule for target.
-pbengine: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 pbengine
+# Convenience name for target.
+pbengine: pbengine/CMakeFiles/pbengine.dir/rule
+
 .PHONY : pbengine
 
 # fast build rule for target.
 pbengine/fast:
-	$(MAKE) -f pbengine/CMakeFiles/pbengine.dir/build.make pbengine/CMakeFiles/pbengine.dir/build
+	cd /home/jaguar3217/pixelbuild/build && $(MAKE) -f pbengine/CMakeFiles/pbengine.dir/build.make pbengine/CMakeFiles/pbengine.dir/build
 .PHONY : pbengine/fast
 
-#=============================================================================
-# Target rules for targets named pbclient
+pbengine.o: pbengine.cpp.o
 
-# Build rule for target.
-pbclient: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 pbclient
-.PHONY : pbclient
+.PHONY : pbengine.o
 
-# fast build rule for target.
-pbclient/fast:
-	$(MAKE) -f pbclient/CMakeFiles/pbclient.dir/build.make pbclient/CMakeFiles/pbclient.dir/build
-.PHONY : pbclient/fast
+# target to build an object file
+pbengine.cpp.o:
+	cd /home/jaguar3217/pixelbuild/build && $(MAKE) -f pbengine/CMakeFiles/pbengine.dir/build.make pbengine/CMakeFiles/pbengine.dir/pbengine.cpp.o
+.PHONY : pbengine.cpp.o
 
-#=============================================================================
-# Target rules for targets named pbserverd
+pbengine.i: pbengine.cpp.i
 
-# Build rule for target.
-pbserverd: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 pbserverd
-.PHONY : pbserverd
+.PHONY : pbengine.i
 
-# fast build rule for target.
-pbserverd/fast:
-	$(MAKE) -f pbserverd/CMakeFiles/pbserverd.dir/build.make pbserverd/CMakeFiles/pbserverd.dir/build
-.PHONY : pbserverd/fast
+# target to preprocess a source file
+pbengine.cpp.i:
+	cd /home/jaguar3217/pixelbuild/build && $(MAKE) -f pbengine/CMakeFiles/pbengine.dir/build.make pbengine/CMakeFiles/pbengine.dir/pbengine.cpp.i
+.PHONY : pbengine.cpp.i
+
+pbengine.s: pbengine.cpp.s
+
+.PHONY : pbengine.s
+
+# target to generate assembly for a file
+pbengine.cpp.s:
+	cd /home/jaguar3217/pixelbuild/build && $(MAKE) -f pbengine/CMakeFiles/pbengine.dir/build.make pbengine/CMakeFiles/pbengine.dir/pbengine.cpp.s
+.PHONY : pbengine.cpp.s
 
 # Help Target
 help:
@@ -158,8 +161,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... pbengine"
-	@echo "... pbclient"
-	@echo "... pbserverd"
+	@echo "... pbengine.o"
+	@echo "... pbengine.i"
+	@echo "... pbengine.s"
 .PHONY : help
 
 
@@ -171,6 +175,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/jaguar3217/pixelbuild/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

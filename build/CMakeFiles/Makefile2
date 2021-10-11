@@ -53,43 +53,25 @@ CMAKE_BINARY_DIR = /home/jaguar3217/pixelbuild/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: libpbengine/all
+all: pbengine/all
 all: pbclient/all
 all: pbserverd/all
 
 .PHONY : all
 
 # The main recursive "preinstall" target.
-preinstall: libpbengine/preinstall
+preinstall: pbengine/preinstall
 preinstall: pbclient/preinstall
 preinstall: pbserverd/preinstall
 
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: libpbengine/clean
+clean: pbengine/clean
 clean: pbclient/clean
 clean: pbserverd/clean
 
 .PHONY : clean
-
-#=============================================================================
-# Directory level rules for directory libpbengine
-
-# Recursive "all" directory target.
-libpbengine/all: libpbengine/CMakeFiles/libpbengine.dir/all
-
-.PHONY : libpbengine/all
-
-# Recursive "preinstall" directory target.
-libpbengine/preinstall:
-
-.PHONY : libpbengine/preinstall
-
-# Recursive "clean" directory target.
-libpbengine/clean: libpbengine/CMakeFiles/libpbengine.dir/clean
-
-.PHONY : libpbengine/clean
 
 #=============================================================================
 # Directory level rules for directory pbclient
@@ -110,6 +92,24 @@ pbclient/clean: pbclient/CMakeFiles/pbclient.dir/clean
 .PHONY : pbclient/clean
 
 #=============================================================================
+# Directory level rules for directory pbengine
+
+# Recursive "all" directory target.
+pbengine/all: pbengine/CMakeFiles/pbengine.dir/all
+
+.PHONY : pbengine/all
+
+# Recursive "preinstall" directory target.
+pbengine/preinstall:
+
+.PHONY : pbengine/preinstall
+
+# Recursive "clean" directory target.
+pbengine/clean: pbengine/CMakeFiles/pbengine.dir/clean
+
+.PHONY : pbengine/clean
+
+#=============================================================================
 # Directory level rules for directory pbserverd
 
 # Recursive "all" directory target.
@@ -128,40 +128,40 @@ pbserverd/clean: pbserverd/CMakeFiles/pbserverd.dir/clean
 .PHONY : pbserverd/clean
 
 #=============================================================================
-# Target rules for target libpbengine/CMakeFiles/libpbengine.dir
+# Target rules for target pbengine/CMakeFiles/pbengine.dir
 
 # All Build rule for target.
-libpbengine/CMakeFiles/libpbengine.dir/all:
-	$(MAKE) -f libpbengine/CMakeFiles/libpbengine.dir/build.make libpbengine/CMakeFiles/libpbengine.dir/depend
-	$(MAKE) -f libpbengine/CMakeFiles/libpbengine.dir/build.make libpbengine/CMakeFiles/libpbengine.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jaguar3217/pixelbuild/build/CMakeFiles --progress-num=1,2 "Built target libpbengine"
-.PHONY : libpbengine/CMakeFiles/libpbengine.dir/all
+pbengine/CMakeFiles/pbengine.dir/all:
+	$(MAKE) -f pbengine/CMakeFiles/pbengine.dir/build.make pbengine/CMakeFiles/pbengine.dir/depend
+	$(MAKE) -f pbengine/CMakeFiles/pbengine.dir/build.make pbengine/CMakeFiles/pbengine.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jaguar3217/pixelbuild/build/CMakeFiles --progress-num=3,4 "Built target pbengine"
+.PHONY : pbengine/CMakeFiles/pbengine.dir/all
 
 # Build rule for subdir invocation for target.
-libpbengine/CMakeFiles/libpbengine.dir/rule: cmake_check_build_system
+pbengine/CMakeFiles/pbengine.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jaguar3217/pixelbuild/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 libpbengine/CMakeFiles/libpbengine.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 pbengine/CMakeFiles/pbengine.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/jaguar3217/pixelbuild/build/CMakeFiles 0
-.PHONY : libpbengine/CMakeFiles/libpbengine.dir/rule
+.PHONY : pbengine/CMakeFiles/pbengine.dir/rule
 
 # Convenience name for target.
-libpbengine: libpbengine/CMakeFiles/libpbengine.dir/rule
+pbengine: pbengine/CMakeFiles/pbengine.dir/rule
 
-.PHONY : libpbengine
+.PHONY : pbengine
 
 # clean rule for target.
-libpbengine/CMakeFiles/libpbengine.dir/clean:
-	$(MAKE) -f libpbengine/CMakeFiles/libpbengine.dir/build.make libpbengine/CMakeFiles/libpbengine.dir/clean
-.PHONY : libpbengine/CMakeFiles/libpbengine.dir/clean
+pbengine/CMakeFiles/pbengine.dir/clean:
+	$(MAKE) -f pbengine/CMakeFiles/pbengine.dir/build.make pbengine/CMakeFiles/pbengine.dir/clean
+.PHONY : pbengine/CMakeFiles/pbengine.dir/clean
 
 #=============================================================================
 # Target rules for target pbclient/CMakeFiles/pbclient.dir
 
 # All Build rule for target.
-pbclient/CMakeFiles/pbclient.dir/all: libpbengine/CMakeFiles/libpbengine.dir/all
+pbclient/CMakeFiles/pbclient.dir/all: pbengine/CMakeFiles/pbengine.dir/all
 	$(MAKE) -f pbclient/CMakeFiles/pbclient.dir/build.make pbclient/CMakeFiles/pbclient.dir/depend
 	$(MAKE) -f pbclient/CMakeFiles/pbclient.dir/build.make pbclient/CMakeFiles/pbclient.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jaguar3217/pixelbuild/build/CMakeFiles --progress-num=3,4 "Built target pbclient"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jaguar3217/pixelbuild/build/CMakeFiles --progress-num=1,2 "Built target pbclient"
 .PHONY : pbclient/CMakeFiles/pbclient.dir/all
 
 # Build rule for subdir invocation for target.
@@ -185,7 +185,7 @@ pbclient/CMakeFiles/pbclient.dir/clean:
 # Target rules for target pbserverd/CMakeFiles/pbserverd.dir
 
 # All Build rule for target.
-pbserverd/CMakeFiles/pbserverd.dir/all: libpbengine/CMakeFiles/libpbengine.dir/all
+pbserverd/CMakeFiles/pbserverd.dir/all: pbengine/CMakeFiles/pbengine.dir/all
 	$(MAKE) -f pbserverd/CMakeFiles/pbserverd.dir/build.make pbserverd/CMakeFiles/pbserverd.dir/depend
 	$(MAKE) -f pbserverd/CMakeFiles/pbserverd.dir/build.make pbserverd/CMakeFiles/pbserverd.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/jaguar3217/pixelbuild/build/CMakeFiles --progress-num=5,6 "Built target pbserverd"

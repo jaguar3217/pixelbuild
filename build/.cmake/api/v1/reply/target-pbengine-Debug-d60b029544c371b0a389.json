@@ -3,7 +3,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "libpbengine/liblibpbengine.a"
+			"path" : "pbengine/libpbengine.a"
 		}
 	],
 	"backtrace" : 1,
@@ -16,7 +16,7 @@
 		],
 		"files" : 
 		[
-			"libpbengine/CMakeLists.txt"
+			"pbengine/CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -50,7 +50,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/home/jaguar3217/pixelbuild/libpbengine"
+					"path" : "/home/jaguar3217/pixelbuild/pbengine"
 				}
 			],
 			"language" : "CXX",
@@ -60,13 +60,13 @@
 			]
 		}
 	],
-	"id" : "libpbengine::@4875abd42fd96e994c81",
-	"name" : "libpbengine",
-	"nameOnDisk" : "liblibpbengine.a",
+	"id" : "pbengine::@ef248bd2f9757c9eab48",
+	"name" : "pbengine",
+	"nameOnDisk" : "libpbengine.a",
 	"paths" : 
 	{
-		"build" : "libpbengine",
-		"source" : "libpbengine"
+		"build" : "pbengine",
+		"source" : "pbengine"
 	},
 	"sourceGroups" : 
 	[
@@ -83,7 +83,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "libpbengine/libpbengine.cpp",
+			"path" : "pbengine/pbengine.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

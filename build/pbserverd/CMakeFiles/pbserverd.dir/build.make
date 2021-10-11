@@ -79,7 +79,7 @@ pbserverd_EXTERNAL_OBJECTS =
 
 pbserverd/pbserverd: pbserverd/CMakeFiles/pbserverd.dir/main.cpp.o
 pbserverd/pbserverd: pbserverd/CMakeFiles/pbserverd.dir/build.make
-pbserverd/pbserverd: libpbengine/liblibpbengine.a
+pbserverd/pbserverd: pbengine/libpbengine.a
 pbserverd/pbserverd: /usr/lib/x86_64-linux-gnu/libsfml-network.so.2.5.1
 pbserverd/pbserverd: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so.2.5.1
 pbserverd/pbserverd: /usr/lib/x86_64-linux-gnu/libsfml-window.so.2.5.1

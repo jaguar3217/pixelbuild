@@ -6,5 +6,5 @@ CXX_FLAGS = -g
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/jaguar3217/pixelbuild/libpbengine 
+CXX_INCLUDES = -I/home/jaguar3217/pixelbuild/pbengine 
 

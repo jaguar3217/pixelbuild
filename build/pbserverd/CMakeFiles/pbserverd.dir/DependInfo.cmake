@@ -10,12 +10,12 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "../libpbengine"
+  "../pbengine"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/jaguar3217/pixelbuild/build/libpbengine/CMakeFiles/libpbengine.dir/DependInfo.cmake"
+  "/home/jaguar3217/pixelbuild/build/pbengine/CMakeFiles/pbengine.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

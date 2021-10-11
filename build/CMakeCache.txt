@@ -223,6 +223,9 @@ SFML_DOC_DIR:PATH=SFML_DOC_DIR-NOTFOUND
 //Dependencies for the target
 libpbengine_LIB_DEPENDS:STATIC=general;sfml-graphics;general;sfml-window;general;sfml-system;general;sfml-network;
 
+//Dependencies for the target
+pbengine_LIB_DEPENDS:STATIC=general;sfml-graphics;general;sfml-window;general;sfml-system;general;sfml-network;
+
 
 ########################
 # INTERNAL cache entries

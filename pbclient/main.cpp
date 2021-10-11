@@ -1,6 +1,6 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include <libpbengine.hpp>
+#include <pbengine.hpp>
 
 int main()
 {

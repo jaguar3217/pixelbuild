@@ -55,7 +55,7 @@
 			[
 				{
 					"backtrace" : 2,
-					"path" : "/home/jaguar3217/pixelbuild/libpbengine"
+					"path" : "/home/jaguar3217/pixelbuild/pbengine"
 				}
 			],
 			"language" : "CXX",
@@ -69,7 +69,7 @@
 	[
 		{
 			"backtrace" : 2,
-			"id" : "libpbengine::@4875abd42fd96e994c81"
+			"id" : "pbengine::@ef248bd2f9757c9eab48"
 		}
 	],
 	"id" : "pbclient::@4a49c3fbc2250ff93dfb",
@@ -87,7 +87,7 @@
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "../libpbengine/liblibpbengine.a",
+				"fragment" : "../pbengine/libpbengine.a",
 				"role" : "libraries"
 			},
 			{

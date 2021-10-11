@@ -11,8 +11,8 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.16.3/CMakeCCompiler.cmake"
   "CMakeFiles/3.16.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.16.3/CMakeSystem.cmake"
-  "../libpbengine/CMakeLists.txt"
   "../pbclient/CMakeLists.txt"
+  "../pbengine/CMakeLists.txt"
   "../pbserverd/CMakeLists.txt"
   "/usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfig.cmake"
   "/usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigDependencies.cmake"
@@ -49,14 +49,14 @@ set(CMAKE_MAKEFILE_OUTPUTS
 # Byproducts of CMake generate step:
 set(CMAKE_MAKEFILE_PRODUCTS
   "CMakeFiles/CMakeDirectoryInformation.cmake"
-  "libpbengine/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "pbengine/CMakeFiles/CMakeDirectoryInformation.cmake"
   "pbclient/CMakeFiles/CMakeDirectoryInformation.cmake"
   "pbserverd/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "libpbengine/CMakeFiles/libpbengine.dir/DependInfo.cmake"
+  "pbengine/CMakeFiles/pbengine.dir/DependInfo.cmake"
   "pbclient/CMakeFiles/pbclient.dir/DependInfo.cmake"
   "pbserverd/CMakeFiles/pbserverd.dir/DependInfo.cmake"
   )

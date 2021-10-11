@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/jaguar3217/pixelbuild/libpbengine/libpbengine.cpp
+SFML/Graphics.hpp
+-
+SFML/Window.hpp
+-
+

@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../libpbengine/libpbengine.hpp
+SFML/Graphics.hpp
+-
+SFML/Window.hpp
+-
+
+/home/jaguar3217/pixelbuild/pbclient/main.cpp
+iostream
+-
+SFML/Graphics.hpp
+-
+libpbengine.hpp
+-
+

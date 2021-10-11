@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-../libpbengine/libpbengine.hpp
+../pbengine/pbengine.hpp
 SFML/Graphics.hpp
 -
 SFML/Window.hpp
@@ -17,6 +17,6 @@ iostream
 -
 SFML/Graphics.hpp
 -
-libpbengine.hpp
+pbengine.hpp
 -
 

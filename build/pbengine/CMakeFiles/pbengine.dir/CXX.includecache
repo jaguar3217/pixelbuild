@@ -6,3 +6,9 @@
 
 #IncludeRegexTransform: 
 
+/home/jaguar3217/pixelbuild/pbengine/pbengine.cpp
+SFML/Graphics.hpp
+-
+SFML/Window.hpp
+-
+

@@ -4,7 +4,7 @@
 bool initEngine(sf::RenderWindow& window) {
     sf::Font font;
     if (!font.loadFromFile("/usr/share/fonts/truetype/msttcorefonts/comicbd.ttf")) {
-        return 1;
+        return 0;
     }
     sf::Text text;
     text.setFont(font);
@@ -23,5 +23,5 @@ bool initEngine(sf::RenderWindow& window) {
         window.display();
     }
     //window.draw(text);
-    return 0;
+    return 1;
 }

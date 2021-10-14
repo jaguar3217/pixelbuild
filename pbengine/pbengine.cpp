@@ -3,9 +3,15 @@
 
 bool initEngine(sf::RenderWindow& window) {
     sf::Font font;
+    #if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+    if (!font.loadFromFile("C:/Windows/Fonts/comicbd.ttf")) { // /usr/share/fonts/truetype/msttcorefonts/comicbd.ttf
+        return 0;
+    }
+    #elif
     if (!font.loadFromFile("/usr/share/fonts/truetype/msttcorefonts/comicbd.ttf")) {
         return 0;
     }
+    #endif
     sf::Text text;
     text.setFont(font);
     text.setString("Hello World");

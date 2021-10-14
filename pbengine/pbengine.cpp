@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <iostream>
 
 bool initEngine(sf::RenderWindow& window) {
     sf::Font font;

@@ -3,7 +3,6 @@
 
 #ifndef PBENGINE_H
 #define PBENGINE_H
-bool initEngine(sf::RenderWindow& window);
 class Engine {
 public:
     Engine(sf::RenderWindow& window);

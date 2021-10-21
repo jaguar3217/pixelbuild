@@ -36,7 +36,7 @@ bool initEngine(sf::RenderWindow& window) {
 }
 
 Engine::Engine(sf::RenderWindow& window) {
-    sf::Thread thread([&] {
+    sf::Thread([&] {
         sf::Font font;
         #ifdef _WIN32
         if (!font.loadFromFile("C:/Windows/Fonts/comicbd.ttf")) {
@@ -65,6 +65,5 @@ Engine::Engine(sf::RenderWindow& window) {
             window.display();
         }
         //window.draw(text);
-    });
-    thread.launch();
+    }).launch();
 }

@@ -6,7 +6,6 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(512, 256), "Pixelbuild");
-    window.setActive(true);
     sf::RenderTexture texture;
     if (!texture.create(512, 256, true)) // enable depth buffer
     {
@@ -14,7 +13,7 @@ int main()
     }
     Engine engine;
     engine.SetTex(&texture);
-    std::cout << "code after Engine init\n";
+    std::cout << "code after Engine declaration\n";
     while (window.isOpen())
     {
         sf::Event event;

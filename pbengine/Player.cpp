@@ -16,9 +16,8 @@ Player::~Player()
 
 bool Player::load(const std::string& texfile)
 {
-    sf::Texture texture;
-    texture.loadFromFile(texfile);
-    m_sprite.setTexture(texture);
+    m_texture.loadFromFile(texfile);
+    m_sprite.setTexture(m_texture);
     m_sprite.setTextureRect(m_rectResourceSprite);
     return true;
 }

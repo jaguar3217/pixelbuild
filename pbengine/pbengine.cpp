@@ -25,4 +25,8 @@ void Engine::SetTex(sf::RenderTexture* texture)
 
 void Engine::Render()
 {
+    m_plr.move(0.01f, 0.01f);
+    m_texture->clear();
+    m_texture->draw(m_plr);
+    m_texture->display();
 }

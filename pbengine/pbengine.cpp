@@ -20,6 +20,7 @@ void Engine::SetTex(sf::RenderTexture* texture)
     m_texture = texture;
     m_texture->clear();
     m_texture->draw(m_plr);
+    m_texture->display();
 }
 
 void Engine::Render()

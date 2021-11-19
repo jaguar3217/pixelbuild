@@ -14,6 +14,12 @@ Player::~Player()
 
 }
 
+void Player::look(int state)
+{
+    m_rectResourceSprite.top = 32 * state;
+    m_sprite.setTextureRect(m_rectResourceSprite);
+}
+
 bool Player::load(const std::string& texfile)
 {
     m_texture.loadFromFile(texfile);

@@ -2,6 +2,7 @@
 #include <functional>
 #include <SFML/Graphics.hpp>
 #include <pbengine.hpp>
+#include <states.hpp>
 
 int main()
 {
@@ -21,6 +22,14 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+            engine.Move(PLAYER_UP);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+            engine.Move(PLAYER_LEFT);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+            engine.Move(PLAYER_DOWN);
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+            engine.Move(PLAYER_RIGHT);
         engine.Render();
         const sf::Texture& _texture = texture.getTexture();
         sf::Sprite sprite(_texture);

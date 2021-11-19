@@ -23,9 +23,27 @@ void Engine::SetTex(sf::RenderTexture* texture)
     m_texture->display();
 }
 
+void Engine::Move(int state)
+{
+    switch (state)
+    {
+        case PLAYER_DOWN:
+            m_plr.move(0, 1);
+            break;
+        case PLAYER_UP:
+            m_plr.move(0, -1);
+            break;
+        case PLAYER_LEFT:
+            m_plr.move(-1, 0);
+            break;
+        case PLAYER_RIGHT:
+            m_plr.move(1, 0);
+            break;
+    }
+}
+
 void Engine::Render()
 {
-    m_plr.move(0.01f, 0.01f);
     m_texture->clear();
     m_texture->draw(m_plr);
     m_texture->display();

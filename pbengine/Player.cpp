@@ -1,5 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include <Player.hpp>
+#include <states.hpp>
 
 Player::Player()
 {
@@ -17,6 +18,14 @@ Player::~Player()
 void Player::look(int state)
 {
     m_rectResourceSprite.top = 32 * state;
+    m_sprite.setTextureRect(m_rectResourceSprite);
+}
+
+int anim[] = {1, 1, 2, 3, 4, 4, 3, 2};
+void Player::increment_frame(int frame)
+{
+    m_frame = frame % 8;
+    m_rectResourceSprite.left = 32 * anim[m_frame];
     m_sprite.setTextureRect(m_rectResourceSprite);
 }
 

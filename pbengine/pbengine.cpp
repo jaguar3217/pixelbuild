@@ -55,11 +55,13 @@ void Engine::Move(int state)
             m_plr.move(m_speed * m_elapsed.asSeconds(), 0);
             break;
     }
+    m_plr.increment_frame(m_speed / 10 * m_elapsed_global.asSeconds());
 }
 
 void Engine::Render()
 {
     m_elapsed = m_clock.getElapsedTime();
+    m_elapsed_global = m_clock_global.getElapsedTime();
     m_clock.restart();
     m_texture->clear();
     m_texture->draw(m_plr);

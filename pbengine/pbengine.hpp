@@ -18,7 +18,9 @@ private:
     sf::RenderTexture* m_texture;
     sf::Texture m_text;
     sf::Time m_elapsed;
+    sf::Time m_elapsed_global;
     sf::Clock m_clock;
+    sf::Clock m_clock_global;
     Player m_plr;
     int m_speed = 100;
 };

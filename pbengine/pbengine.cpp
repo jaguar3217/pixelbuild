@@ -33,6 +33,16 @@ int Engine::GetSpeed()
     return m_speed;
 }
 
+int Engine::GetX()
+{
+    return m_plr.getPosition().x;
+}
+
+int Engine::GetY()
+{
+    return m_plr.getPosition().y;
+}
+
 void Engine::Move(int state)
 {
     if (m_plr.getPosition().x >= 500 && m_plr.getPosition().x <= 502) m_speed += 10;

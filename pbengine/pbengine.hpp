@@ -14,6 +14,8 @@ public:
     void Move(int state);
     void Speed(int speed);
     int GetSpeed();
+    int GetX();
+    int GetY();
 private:
     sf::RenderTexture* m_texture;
     sf::Texture m_text;

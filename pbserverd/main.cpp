@@ -53,6 +53,7 @@ int main() {
                 {
                     connectedClients[i].x = x;
                     connectedClients[i].y = y;
+                    std::cout << "[pbserverd] Movement from " << sender << " with port " << port << " - " << "X: " << x << ", Y: " << y << '\n';
                     break;
                 }
             }

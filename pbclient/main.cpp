@@ -48,34 +48,64 @@ int main(int argc, char **argv)
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             state = PLAYER_UP;
             engine.Move(state);
+            if (argc == 2)
+            {
+                sf::Packet packet;
+                packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
+                sf::IpAddress recipient = argv[1];
+                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
+                    std::cerr << "[pbclient] cannot send to IP, exiting\n";
+                    return 1;
+                }
+            }
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             state = PLAYER_LEFT;
             engine.Move(state);
+            if (argc == 2)
+            {
+                sf::Packet packet;
+                packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
+                sf::IpAddress recipient = argv[1];
+                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
+                    std::cerr << "[pbclient] cannot send to IP, exiting\n";
+                    return 1;
+                }
+            }
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
             state = PLAYER_DOWN;
             engine.Move(state);
+            if (argc == 2)
+            {
+                sf::Packet packet;
+                packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
+                sf::IpAddress recipient = argv[1];
+                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
+                    std::cerr << "[pbclient] cannot send to IP, exiting\n";
+                    return 1;
+                }
+            }
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             state = PLAYER_RIGHT;
             engine.Move(state);
+            if (argc == 2)
+            {
+                sf::Packet packet;
+                packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
+                sf::IpAddress recipient = argv[1];
+                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
+                    std::cerr << "[pbclient] cannot send to IP, exiting\n";
+                    return 1;
+                }
+            }
         }
         engine.Render();
         const sf::Texture& _texture = texture.getTexture();
         sf::Sprite sprite(_texture);
         window.draw(sprite);
         window.display();
-        if (argc == 2)
-        {
-            sf::Packet packet;
-            packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
-            sf::IpAddress recipient = argv[1];
-            if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                std::cerr << "[pbclient] cannot send to IP, exiting\n";
-                return 1;
-            }
-        }
     }
     return 0;
 }

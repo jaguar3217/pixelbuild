@@ -9,15 +9,19 @@ int main(int argc, char **argv)
 {
     sf::RenderWindow window(sf::VideoMode(512, 256), "Pixelbuild");
     sf::RenderTexture texture;
+    sf::UdpSocket socket;
+    sf::Packet packet;
+    sf::IpAddress sender;
+    unsigned short port;
     if (!texture.create(512, 256, true)) // enable depth buffer
     {
         std::cerr << "[pbclient] Cannot create sf::RenderTexture\n";
     }
     Engine engine;
     engine.SetTex(&texture);
-    sf::UdpSocket socket;
     if (argc == 2)
         {
+            socket.setBlocking(false);
             sf::Packet packet;
             packet << (sf::Int8)0;
             sf::IpAddress recipient = argv[1];

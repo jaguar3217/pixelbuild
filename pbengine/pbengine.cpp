@@ -23,6 +23,11 @@ void Engine::SetTex(sf::RenderTexture* texture)
     m_texture->display();
 }
 
+void Engine::BindPlrList(std::vector<Player*> plrlist)
+{
+    m_plrlist = plrlist;
+}
+
 void Engine::Speed(int speed)
 {
     m_speed = speed;
@@ -74,6 +79,8 @@ void Engine::Render()
     m_elapsed_global = m_clock_global.getElapsedTime();
     m_clock.restart();
     m_texture->clear();
+    for (int i = 0; i < m_plrlist.size(); i++)
+        m_texture->draw(*m_plrlist[i]);
     m_texture->draw(m_plr);
     m_texture->display();
 }

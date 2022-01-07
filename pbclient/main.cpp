@@ -1,5 +1,5 @@
 #include <iostream>
-#include <functional>
+#include <vector>
 #include <SFML/Graphics.hpp>
 #include <SFML/Network.hpp>
 #include <pbengine.hpp>
@@ -13,12 +13,22 @@ int main(int argc, char **argv)
     sf::Packet packet;
     sf::IpAddress sender;
     unsigned short port;
-    if (!texture.create(512, 256, true)) // enable depth buffer
+    if (!texture.create(512, 256, true)) // TODO: Replace with non-deprecated method to enable depth buffer
     {
         std::cerr << "[pbclient] Cannot create sf::RenderTexture\n";
     }
     Engine engine;
     engine.SetTex(&texture);
+    std::vector<Player*> plrlist;
+    Player npc1;
+    Player npc2;
+    npc1.load("plrsheet.png");
+    npc2.load("plrsheet.png");
+    npc1.move(100, 100);
+    npc2.move(200, 200);
+    plrlist.push_back(&npc1);
+    plrlist.push_back(&npc2);
+    engine.BindPlrList(plrlist);
     if (argc == 2)
         {
             socket.setBlocking(false);
@@ -46,6 +56,27 @@ int main(int argc, char **argv)
                     }
                 }
                 window.close();
+            }
+        }
+        sf::Packet s_packet;
+        if (socket.receive(s_packet, sender, port) == sf::Socket::Done)
+        {
+            sf::Int8 cmd;
+            s_packet >> cmd;
+            switch (cmd)
+            {
+            case 0: {
+                std::cout << "[pbclient] Packet received: Client Connected\n";
+                break;
+            }
+            case 1: {
+                std::cout << "[pbclient] Packet received: Client Disconnected\n";
+                break;
+            }
+            case 2: {
+                std::cout << "[pbclient] Packet received: X/Y Movement\n";
+                break;
+            }
             }
         }
         int state;

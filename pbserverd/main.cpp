@@ -15,7 +15,6 @@ int main() {
         return 1;
     }
     while (true) {
-        // HAIL KIM JONG-UN!
         if (socket.receive(packet, sender, port) != sf::Socket::Done)
         {
             std::cerr << "[pbserverd] connection lost from " << sender << '\n';

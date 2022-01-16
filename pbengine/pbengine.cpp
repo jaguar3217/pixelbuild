@@ -6,7 +6,6 @@
 
 Engine::Engine() {
     std::cout << "[pbengine] Starting...\n";
-    // WORSHIP HARUHI!
     m_plr.load("plrsheet.png");
     std::cout << "[pbengine] Started.\n";
 }

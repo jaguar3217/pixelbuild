@@ -67,6 +67,11 @@ int main(int argc, char **argv)
             {
             case 0: {
                 std::cout << "[pbclient] Packet received: Client Connected\n";
+                static Player conn;
+                conn.load("plrsheet.png");
+                conn.move(150, 150);
+                plrlist.push_back(&conn);
+                engine.BindPlrList(plrlist);
                 break;
             }
             case 1: {

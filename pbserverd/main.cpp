@@ -44,10 +44,20 @@ int main() {
             std::cout << "[pbserverd] New client connected: " << sender << " with port " << port << ".\n";
             for (int i = 0; i < connectedClients.size(); i++)
             {
-                sf::Packet spacket;
-                spacket << (sf::Int8)0 << connectedClients[i].ip.toInteger() << connectedClients[i].port; // Client Connected
-                if (socket.send(spacket, connectedClients[i].ip, connectedClients[i].port) != sf::Socket::Done)
-                    std::cerr << "[pbserverd] Cannot send Client Connected packet to " << connectedClients[i].ip << ':' << connectedClients[i].port << '\n';
+                std::cout << "[pbserverd] Connected Client IP: " << connectedClients[i].ip << ", Port: " << connectedClients[i].port << '\n';
+                std::cout << "[pbserverd] Sender IP: " << sender << ", Port: " << port << '\n';
+                if (connectedClients[i].ip != sender || connectedClients[i].port != port)
+                {
+                    sf::Packet spacket;
+                    std::cout << "[pbserverd] Sender: " << sender << ", Port: " << port << '\n';
+                    spacket << (sf::Int8)0 << sender.toInteger() << port; // Client Connected
+                    if (socket.send(spacket, connectedClients[i].ip, connectedClients[i].port) != sf::Socket::Done)
+                        std::cerr << "[pbserverd] Cannot send Client Connected packet to " << connectedClients[i].ip << ':' << connectedClients[i].port << '\n';
+                }
+                else
+                {
+                    std::cout << "[pbserverd] Not reached.\n";
+                }
             }
             break;}
         case 1: {// Indicate Disconnection
@@ -66,7 +76,7 @@ int main() {
             for (int i = 0; i < connectedClients.size(); i++)
             {
                 sf::Packet spacket;
-                spacket << (sf::Int8)1 << connectedClients[i].ip.toInteger() << connectedClients[i].port; // Client Disconnected
+                spacket << (sf::Int8)1 << sender.toInteger() << port; // Client Disconnected
                 if (socket.send(spacket, connectedClients[i].ip, connectedClients[i].port) != sf::Socket::Done)
                     std::cerr << "[pbserverd] Cannot send Client Disconnected packet to " << connectedClients[i].ip << ':' << connectedClients[i].port << '\n';
             }
@@ -87,7 +97,7 @@ int main() {
             for (int i = 0; i < connectedClients.size(); i++)
             {
                 sf::Packet spacket;
-                spacket << (sf::Int8)2 << connectedClients[i].ip.toInteger() << connectedClients[i].x << connectedClients[i].y; // Move X/Y
+                spacket << (sf::Int8)2 << sender.toInteger() << port << x << y; // Move X/Y
                 if (socket.send(spacket, connectedClients[i].ip, connectedClients[i].port) != sf::Socket::Done)
                     std::cerr << "[pbserverd] cannot send X/Y data to " << connectedClients[i].ip << ':' << connectedClients[i].port << '\n';
             }

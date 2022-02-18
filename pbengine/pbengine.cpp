@@ -49,10 +49,6 @@ int Engine::GetY()
 
 void Engine::Move(int state)
 {
-    if (m_plr.getPosition().x >= 500 && m_plr.getPosition().x <= 502) m_speed += 10;
-    if (m_plr.getPosition().y >= 200 && m_plr.getPosition().y <= 202) m_speed -= 10;
-    if (m_speed < 10 ) m_speed = 10 ;
-    if (m_speed > 600) m_speed = 600;
     m_plr.look(state);
     switch (state)
     {

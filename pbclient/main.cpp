@@ -20,14 +20,6 @@ int main(int argc, char **argv)
     Engine engine;
     engine.SetTex(&texture);
     std::vector<Player*> plrlist;
-    Player npc1;
-    Player npc2;
-    npc1.load("plrsheet.png");
-    npc2.load("plrsheet.png");
-    npc1.move(100, 100);
-    npc2.move(200, 200);
-    plrlist.push_back(&npc1);
-    plrlist.push_back(&npc2);
     engine.BindPlrList(plrlist);
     if (argc == 2)
         {
@@ -63,23 +55,51 @@ int main(int argc, char **argv)
         {
             sf::Int8 cmd;
             s_packet >> cmd;
+            sf::Int32 conn_ip_int;
+            unsigned short conn_port;
+            s_packet >> conn_ip_int >> conn_port;
+            sf::IpAddress conn_ip(conn_ip_int);
             switch (cmd)
             {
             case 0: {
                 std::cout << "[pbclient] Packet received: Client Connected\n";
                 static Player conn;
                 conn.load("plrsheet.png");
-                conn.move(150, 150);
+                conn.m_ip = conn_ip;
+                conn.m_port = conn_port;
                 plrlist.push_back(&conn);
                 engine.BindPlrList(plrlist);
                 break;
             }
             case 1: {
                 std::cout << "[pbclient] Packet received: Client Disconnected\n";
+                for (int i = 0; i < plrlist.size(); i++)
+                {
+                    if (plrlist[i]->m_ip == conn_ip || plrlist[i]->m_port == conn_port)
+                    {
+                        std::cout << "[pbclient] Found.\n";
+                        if (i == 0)
+                            plrlist.erase(plrlist.begin());
+                        else
+                            plrlist.erase(std::next(plrlist.begin(), i));
+                        engine.BindPlrList(plrlist);
+                        break;
+                    }
+                }
                 break;
             }
             case 2: {
                 std::cout << "[pbclient] Packet received: X/Y Movement\n";
+                int x, y;
+                s_packet >> x >> y;
+                for (int i = 0; i < plrlist.size(); i++)
+                {
+                    if (plrlist[i]->m_ip == conn_ip || plrlist[i]->m_port == conn_port)
+                    {
+                        plrlist[i]->setPosition(x, y);
+                        break;
+                    }
+                }
                 break;
             }
             }

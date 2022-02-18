@@ -113,7 +113,7 @@ int main(int argc, char **argv)
                 packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
                 sf::IpAddress recipient = argv[1];
                 if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                    std::cerr << "[pbclient] cannot send to IP, exiting\n";
+                    std::cerr << "[pbclient] There is packet loss.\n";
                     return 1;
                 }
             }
@@ -127,7 +127,7 @@ int main(int argc, char **argv)
                 packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
                 sf::IpAddress recipient = argv[1];
                 if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                    std::cerr << "[pbclient] cannot send to IP, exiting\n";
+                    std::cerr << "[pbclient] There is packet loss.\n";
                     return 1;
                 }
             }
@@ -141,7 +141,7 @@ int main(int argc, char **argv)
                 packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
                 sf::IpAddress recipient = argv[1];
                 if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                    std::cerr << "[pbclient] cannot send to IP, exiting\n";
+                    std::cerr << "[pbclient] There is packet loss.\n";
                     return 1;
                 }
             }
@@ -155,7 +155,7 @@ int main(int argc, char **argv)
                 packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
                 sf::IpAddress recipient = argv[1];
                 if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                    std::cerr << "[pbclient] cannot send to IP, exiting\n";
+                    std::cerr << "[pbclient] There is packet loss.\n";
                     return 1;
                 }
             }

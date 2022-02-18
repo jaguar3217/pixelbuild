@@ -114,7 +114,6 @@ int main(int argc, char **argv)
                 sf::IpAddress recipient = argv[1];
                 if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
                     std::cerr << "[pbclient] There is packet loss.\n";
-                    return 1;
                 }
             }
         }
@@ -128,7 +127,6 @@ int main(int argc, char **argv)
                 sf::IpAddress recipient = argv[1];
                 if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
                     std::cerr << "[pbclient] There is packet loss.\n";
-                    return 1;
                 }
             }
         }
@@ -142,7 +140,6 @@ int main(int argc, char **argv)
                 sf::IpAddress recipient = argv[1];
                 if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
                     std::cerr << "[pbclient] There is packet loss.\n";
-                    return 1;
                 }
             }
         }
@@ -156,7 +153,6 @@ int main(int argc, char **argv)
                 sf::IpAddress recipient = argv[1];
                 if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
                     std::cerr << "[pbclient] There is packet loss.\n";
-                    return 1;
                 }
             }
         }

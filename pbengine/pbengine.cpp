@@ -47,6 +47,11 @@ int Engine::GetY()
     return m_plr.getPosition().y;
 }
 
+int Engine::GetFrame()
+{
+    return m_plr.get_frame();
+}
+
 void Engine::Move(int state)
 {
     m_plr.look(state);

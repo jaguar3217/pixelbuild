@@ -29,6 +29,11 @@ void Player::increment_frame(int frame)
     m_sprite.setTextureRect(m_rectResourceSprite);
 }
 
+int Player::get_frame()
+{
+    return m_frame;
+}
+
 bool Player::load(const std::string& texfile)
 {
     m_texture.loadFromFile(texfile);

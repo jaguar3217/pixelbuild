@@ -17,6 +17,7 @@ public:
     int GetSpeed();
     int GetX();
     int GetY();
+    int GetFrame();
 private:
     sf::RenderTexture* m_texture;
     sf::Texture m_text;

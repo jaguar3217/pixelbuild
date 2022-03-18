@@ -100,9 +100,36 @@ int main(int argc, char **argv)
                 }
                 break;
             }
+            case 3: {
+                std::cout << "[pbclient] Packet receied: Update Animation\n";
+                int frame;
+                s_packet >> frame;
+                for (int i = 0; i < plrlist.size(); i++)
+                {
+                    if (plrlist[i]->m_ip == conn_ip || plrlist[i]->m_port == conn_port)
+                    {
+                        plrlist[i]->increment_frame(frame);
+                        break;
+                    }
+                }
+                break;
+            }
+            case 4: {
+                std::cout << "[pbclient] Packet received: Update State\n";
+                int state;
+                s_packet >> state;
+                for (int i = 0; i < plrlist.size(); i++)
+                {
+                    if (plrlist[i]->m_ip == conn_ip || plrlist[i]->m_port == conn_port)
+                    {
+                        plrlist[i]->look(state);
+                    }
+                }
+                break;
+            }
             }
         }
-        int state;
+        int state; bool keyPressed = false;
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
             state = PLAYER_UP;
             engine.Move(state);
@@ -114,7 +141,13 @@ int main(int argc, char **argv)
                 if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
                     std::cerr << "[pbclient] There is packet loss.\n";
                 }
+                packet.clear();
+                packet << (sf::Int8)4 << state;
+                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
+                    std::cerr << "[pbclient] There is packet loss.\n";
+                }
             }
+            keyPressed = true;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             state = PLAYER_LEFT;
@@ -127,7 +160,13 @@ int main(int argc, char **argv)
                 if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
                     std::cerr << "[pbclient] There is packet loss.\n";
                 }
+                packet.clear();
+                packet << (sf::Int8)4 << state;
+                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
+                    std::cerr << "[pbclient] There is packet loss.\n";
+                }
             }
+            keyPressed = true;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
             state = PLAYER_DOWN;
@@ -140,7 +179,13 @@ int main(int argc, char **argv)
                 if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
                     std::cerr << "[pbclient] There is packet loss.\n";
                 }
+                packet.clear();
+                packet << (sf::Int8)4 << state;
+                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
+                    std::cerr << "[pbclient] There is packet loss.\n";
+                }
             }
+            keyPressed = true;
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             state = PLAYER_RIGHT;
@@ -153,6 +198,23 @@ int main(int argc, char **argv)
                 if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
                     std::cerr << "[pbclient] There is packet loss.\n";
                 }
+                packet.clear();
+                packet << (sf::Int8)4 << state;
+                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
+                    std::cerr << "[pbclient] There is packet loss.\n";
+                }
+            }
+            keyPressed = true;
+        }
+        // Send current animation state
+        if (argc == 2 && keyPressed)
+        {
+            sf::Packet packet;
+            packet << (sf::Int8)3 << engine.GetFrame();
+            sf::IpAddress recepient = argv[1];
+            if (socket.send(packet, recepient, 25635) != sf::Socket::Done)
+            {
+                std::cerr << "[pbclient] There is packet loss.\n";
             }
         }
         engine.Render();

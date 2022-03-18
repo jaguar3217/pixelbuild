@@ -9,6 +9,7 @@ public:
     ~Player();
     void look(int state);
     void increment_frame(int frame);
+    int get_frame();
     bool load(const std::string& texfile);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const;
     sf::IpAddress m_ip;

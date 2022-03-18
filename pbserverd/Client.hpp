@@ -3,6 +3,8 @@
 struct Client {
     sf::IpAddress ip;
     unsigned short port;
-    int x;
-    int y;
+    int x = 0;
+    int y = 0;
+    int frame = 0;
+    int state = 0;
 };

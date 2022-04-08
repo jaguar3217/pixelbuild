@@ -27,9 +27,7 @@ int main(int argc, char **argv)
             sf::Packet packet;
             packet << (sf::Int8)0;
             sf::IpAddress recipient = argv[1];
-            if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                std::cerr << "[pbclient] There is packet loss.\n";
-            }
+            socket.send(packet, recipient, 25635);
         }
     while (window.isOpen())
     {
@@ -41,9 +39,7 @@ int main(int argc, char **argv)
                     sf::Packet packet;
                     packet << (sf::Int8)1;
                     sf::IpAddress recipient = argv[1];
-                    if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                        std::cerr << "[pbclient] There is packet loss.\n";
-                    }
+                    socket.send(packet, recipient, 25635);
                 }
                 window.close();
             }
@@ -60,7 +56,6 @@ int main(int argc, char **argv)
             switch (cmd)
             {
             case 0: {
-                std::cout << "[pbclient] Packet received: Client Connected\n";
                 static Player conn;
                 conn.load("plrsheet.png");
                 conn.m_ip = conn_ip;
@@ -70,12 +65,10 @@ int main(int argc, char **argv)
                 break;
             }
             case 1: {
-                std::cout << "[pbclient] Packet received: Client Disconnected\n";
                 for (int i = 0; i < plrlist.size(); i++)
                 {
                     if (plrlist[i]->m_ip == conn_ip || plrlist[i]->m_port == conn_port)
                     {
-                        std::cout << "[pbclient] Found.\n";
                         if (i == 0)
                             plrlist.erase(plrlist.begin());
                         else
@@ -87,7 +80,6 @@ int main(int argc, char **argv)
                 break;
             }
             case 2: {
-                std::cout << "[pbclient] Packet received: X/Y Movement\n";
                 int x, y;
                 s_packet >> x >> y;
                 for (int i = 0; i < plrlist.size(); i++)
@@ -101,7 +93,6 @@ int main(int argc, char **argv)
                 break;
             }
             case 3: {
-                std::cout << "[pbclient] Packet receied: Update Animation\n";
                 int frame;
                 s_packet >> frame;
                 for (int i = 0; i < plrlist.size(); i++)
@@ -115,7 +106,6 @@ int main(int argc, char **argv)
                 break;
             }
             case 4: {
-                std::cout << "[pbclient] Packet received: Update State\n";
                 int state;
                 s_packet >> state;
                 for (int i = 0; i < plrlist.size(); i++)
@@ -138,14 +128,10 @@ int main(int argc, char **argv)
                 sf::Packet packet;
                 packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
                 sf::IpAddress recipient = argv[1];
-                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                    std::cerr << "[pbclient] There is packet loss.\n";
-                }
+                socket.send(packet, recipient, 25635);
                 packet.clear();
                 packet << (sf::Int8)4 << state;
-                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                    std::cerr << "[pbclient] There is packet loss.\n";
-                }
+                socket.send(packet, recipient, 25635);
             }
             keyPressed = true;
         }
@@ -157,14 +143,10 @@ int main(int argc, char **argv)
                 sf::Packet packet;
                 packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
                 sf::IpAddress recipient = argv[1];
-                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                    std::cerr << "[pbclient] There is packet loss.\n";
-                }
+                socket.send(packet, recipient, 25635);
                 packet.clear();
                 packet << (sf::Int8)4 << state;
-                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                    std::cerr << "[pbclient] There is packet loss.\n";
-                }
+                socket.send(packet, recipient, 25635);
             }
             keyPressed = true;
         }
@@ -176,14 +158,10 @@ int main(int argc, char **argv)
                 sf::Packet packet;
                 packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
                 sf::IpAddress recipient = argv[1];
-                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                    std::cerr << "[pbclient] There is packet loss.\n";
-                }
+                socket.send(packet, recipient, 25635);
                 packet.clear();
                 packet << (sf::Int8)4 << state;
-                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                    std::cerr << "[pbclient] There is packet loss.\n";
-                }
+                socket.send(packet, recipient, 25635);
             }
             keyPressed = true;
         }
@@ -195,14 +173,10 @@ int main(int argc, char **argv)
                 sf::Packet packet;
                 packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
                 sf::IpAddress recipient = argv[1];
-                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                    std::cerr << "[pbclient] There is packet loss.\n";
-                }
+                socket.send(packet, recipient, 25635);
                 packet.clear();
                 packet << (sf::Int8)4 << state;
-                if (socket.send(packet, recipient, 25635) != sf::Socket::Done) {
-                    std::cerr << "[pbclient] There is packet loss.\n";
-                }
+                socket.send(packet, recipient, 25635);
             }
             keyPressed = true;
         }
@@ -212,10 +186,7 @@ int main(int argc, char **argv)
             sf::Packet packet;
             packet << (sf::Int8)3 << engine.GetFrame();
             sf::IpAddress recepient = argv[1];
-            if (socket.send(packet, recepient, 25635) != sf::Socket::Done)
-            {
-                std::cerr << "[pbclient] There is packet loss.\n";
-            }
+            socket.send(packet, recepient, 25635);
         }
         engine.Render();
         const sf::Texture& _texture = texture.getTexture();

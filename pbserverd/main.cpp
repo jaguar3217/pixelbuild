@@ -45,12 +45,34 @@ int main() {
             std::cout << "[pbserverd] New client connected: " << sender << " with port " << port << ".\n";
             for (int i = 0; i < connectedClients.size(); i++)
             {
-                std::cout << "[pbserverd] Connected Client IP: " << connectedClients[i].ip << ", Port: " << connectedClients[i].port << '\n';
-                std::cout << "[pbserverd] Sender IP: " << sender << ", Port: " << port << '\n';
+                if (connectedClients[i].ip != sender || connectedClients[i].port != port)
+                {
+                    // Send Client Connected
+                    sf::Packet spacket;
+                    spacket << (sf::Int8)0 << connectedClients[i].ip.toInteger() << connectedClients[i].port;
+                    if (socket.send(spacket, sender, port) != sf::Socket::Done)
+                        std::cerr << "[pbserverd] Cannot send Client Connected packet to " << sender << ':' << port << '\n';
+                    // Send Move X/Y
+                    spacket.clear();
+                    spacket << (sf::Int8)2 << connectedClients[i].ip.toInteger() << connectedClients[i].port << connectedClients[i].x << connectedClients[i].y; // Move X/Y
+                    if (socket.send(spacket, sender, port) != sf::Socket::Done)
+                        std::cerr << "[pbserverd] cannot send X/Y data to " << sender << ':' << port << '\n';
+                    // Send Frame
+                    spacket.clear();
+                    spacket << (sf::Int8)3 << connectedClients[i].ip.toInteger() << connectedClients[i].port << connectedClients[i].frame;
+                    if (socket.send(spacket, sender, port) != sf::Socket::Done)
+                        std::cerr << "[pbserverd] cannot send frame packets to " << sender << ':' << port << '\n';
+                    // Send State
+                    spacket << (sf::Int8)4 << connectedClients[i].ip.toInteger() << connectedClients[i].port << connectedClients[i].state;
+                    if (socket.send(spacket, sender, port) != sf::Socket::Done)
+                        std::cerr << "[pbserverd] cannot send state packets to " << sender << ':' << port << '\n';
+                }
+            }
+            for (int i = 0; i < connectedClients.size(); i++)
+            {
                 if (connectedClients[i].ip != sender || connectedClients[i].port != port)
                 {
                     sf::Packet spacket;
-                    std::cout << "[pbserverd] Sender: " << sender << ", Port: " << port << '\n';
                     spacket << (sf::Int8)0 << sender.toInteger() << port; // Client Connected
                     if (socket.send(spacket, connectedClients[i].ip, connectedClients[i].port) != sf::Socket::Done)
                         std::cerr << "[pbserverd] Cannot send Client Connected packet to " << connectedClients[i].ip << ':' << connectedClients[i].port << '\n';

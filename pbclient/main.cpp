@@ -53,22 +53,22 @@ int main(int argc, char **argv)
             unsigned short conn_port;
             s_packet >> conn_ip_int >> conn_port;
             sf::IpAddress conn_ip(conn_ip_int);
-            switch (cmd)
+            if (cmd == 0)
             {
-            case 0: {
                 static Player conn;
                 conn.load("plrsheet.png");
                 conn.m_ip = conn_ip;
                 conn.m_port = conn_port;
                 plrlist.push_back(&conn);
                 engine.BindPlrList(plrlist);
-                break;
             }
-            case 1: {
-                for (int i = 0; i < plrlist.size(); i++)
+            for (int i = 0; i < plrlist.size(); i++)
+            {
+                if (plrlist[i]->m_ip == conn_ip || plrlist[i]->m_port == conn_port)
                 {
-                    if (plrlist[i]->m_ip == conn_ip || plrlist[i]->m_port == conn_port)
+                    switch (cmd)
                     {
+                    case 1: {
                         if (i == 0)
                             plrlist.erase(plrlist.begin());
                         else
@@ -76,97 +76,39 @@ int main(int argc, char **argv)
                         engine.BindPlrList(plrlist);
                         break;
                     }
-                }
-                break;
-            }
-            case 2: {
-                int x, y;
-                s_packet >> x >> y;
-                for (int i = 0; i < plrlist.size(); i++)
-                {
-                    if (plrlist[i]->m_ip == conn_ip || plrlist[i]->m_port == conn_port)
-                    {
+                    case 2: {
+                        int x, y;
+                        s_packet >> x >> y;
                         plrlist[i]->setPosition(x, y);
                         break;
                     }
-                }
-                break;
-            }
-            case 3: {
-                int frame;
-                s_packet >> frame;
-                for (int i = 0; i < plrlist.size(); i++)
-                {
-                    if (plrlist[i]->m_ip == conn_ip || plrlist[i]->m_port == conn_port)
-                    {
+                    case 3: {
+                        int frame;
+                        s_packet >> frame;
                         plrlist[i]->increment_frame(frame);
                         break;
                     }
-                }
-                break;
-            }
-            case 4: {
-                int state;
-                s_packet >> state;
-                for (int i = 0; i < plrlist.size(); i++)
-                {
-                    if (plrlist[i]->m_ip == conn_ip || plrlist[i]->m_port == conn_port)
-                    {
+                    case 4: {
+                        int state;
+                        s_packet >> state;
                         plrlist[i]->look(state);
+                        break;
                     }
+                    }
+                    break;
                 }
-                break;
-            }
             }
         }
         int state; bool keyPressed = false;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            state = PLAYER_UP;
-            engine.Move(state);
-            if (argc == 2)
-            {
-                sf::Packet packet;
-                packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
-                sf::IpAddress recipient = argv[1];
-                socket.send(packet, recipient, 25635);
-                packet.clear();
-                packet << (sf::Int8)4 << state;
-                socket.send(packet, recipient, 25635);
-            }
-            keyPressed = true;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            state = PLAYER_LEFT;
-            engine.Move(state);
-            if (argc == 2)
-            {
-                sf::Packet packet;
-                packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
-                sf::IpAddress recipient = argv[1];
-                socket.send(packet, recipient, 25635);
-                packet.clear();
-                packet << (sf::Int8)4 << state;
-                socket.send(packet, recipient, 25635);
-            }
-            keyPressed = true;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            state = PLAYER_DOWN;
-            engine.Move(state);
-            if (argc == 2)
-            {
-                sf::Packet packet;
-                packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
-                sf::IpAddress recipient = argv[1];
-                socket.send(packet, recipient, 25635);
-                packet.clear();
-                packet << (sf::Int8)4 << state;
-                socket.send(packet, recipient, 25635);
-            }
-            keyPressed = true;
-        }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            state = PLAYER_RIGHT;
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) ||
+            sf::Keyboard::isKeyPressed(sf::Keyboard::A) ||
+            sf::Keyboard::isKeyPressed(sf::Keyboard::S) ||
+            sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) state = PLAYER_UP;
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) state = PLAYER_LEFT;
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) state = PLAYER_DOWN;
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) state = PLAYER_RIGHT;
             engine.Move(state);
             if (argc == 2)
             {

@@ -12,12 +12,9 @@ int main() {
     sf::IpAddress sender;
     unsigned short port;
     char level[128];
-    std::ifstream levelFile("main.pblvl", std::ifstream::binary);
-    if (levelFile)
-    {
+    sf::FileInputStream levelFile;
+    if (levelFile.open("main.pblvl"))
         levelFile.read(level, 128);
-        levelFile.close();
-    }
     if (socket.bind(25635) != sf::Socket::Done)
     {
         std::cerr << "[pbserverd] cannot bind to port 25635 (UDP)\n";

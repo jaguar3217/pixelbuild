@@ -66,13 +66,6 @@ int main(int argc, char **argv)
             {
                 std::cout << "[pbclient] Received Five\n";
                 char level[128];
-                /*for (int i = 0; i < 128; i++)
-                {
-                    sf::Uint8 c;
-                    s_packet >> c;
-                    level[i] = c;
-                    std::cout << std::hex << (int)c << ' ';
-                }*/
                 socket.setBlocking(true);
                 std::size_t received;
                 if (socket.receive(level, 128, received, sender, port) != sf::Socket::Done)

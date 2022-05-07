@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <SFML/Network.hpp>
 #include "Client.hpp"
@@ -10,6 +11,13 @@ int main() {
     sf::Packet packet;
     sf::IpAddress sender;
     unsigned short port;
+    char level[128];
+    std::ifstream levelFile("main.pblvl", std::ifstream::binary);
+    if (levelFile)
+    {
+        levelFile.read(level, 128);
+        levelFile.close();
+    }
     if (socket.bind(25635) != sf::Socket::Done)
     {
         std::cerr << "[pbserverd] cannot bind to port 25635 (UDP)\n";
@@ -43,6 +51,14 @@ int main() {
             c.y = 0;
             connectedClients.push_back(c);
             std::cout << "[pbserverd] New client connected: " << sender << " with port " << port << ".\n";
+            sf::Packet s_packet;
+            // Send Tilemap
+            s_packet << (sf::Int8)5; // "prepare to send tilemap" command
+            if (socket.send(s_packet, sender, port) != sf::Socket::Done)
+                std::cerr << "[pbserverd] cannot send tilemap preparation command to " << sender << ':' << port << '\n';
+            s_packet.clear();
+            if (socket.send(level, 128, sender, port) != sf::Socket::Done)
+                std::cerr << "[pbserverd] cannot send tilemap to " << sender << ':' << port << '\n';
             for (int i = 0; i < connectedClients.size(); i++)
             {
                 if (connectedClients[i].ip != sender || connectedClients[i].port != port)

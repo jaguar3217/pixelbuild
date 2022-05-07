@@ -62,6 +62,24 @@ int main(int argc, char **argv)
                 plrlist.push_back(&conn);
                 engine.BindPlrList(plrlist);
             }
+            if (cmd == 5)
+            {
+                std::cout << "[pbclient] Received Five\n";
+                char level[128];
+                /*for (int i = 0; i < 128; i++)
+                {
+                    sf::Uint8 c;
+                    s_packet >> c;
+                    level[i] = c;
+                    std::cout << std::hex << (int)c << ' ';
+                }*/
+                socket.setBlocking(true);
+                std::size_t received;
+                if (socket.receive(level, 128, received, sender, port) != sf::Socket::Done)
+                    std::cerr << "[pbclient] [ERROR] Cannot receive tilemap from server\n";
+                engine.SetLevel(level);
+                socket.setBlocking(false);
+            }
             for (int i = 0; i < plrlist.size(); i++)
             {
                 if (plrlist[i]->m_ip == conn_ip || plrlist[i]->m_port == conn_port)

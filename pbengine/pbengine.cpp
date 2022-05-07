@@ -22,6 +22,18 @@ void Engine::SetTex(sf::RenderTexture* texture)
     m_texture->display();
 }
 
+void Engine::SetLevel(char level[])
+{
+    for (int i = 0; i < 128; i++)
+    {
+        std::cout << std::hex << (int)level[i] << ' ';
+        m_level[i] = level[i];
+    }
+
+    if (!m_tilemap.load("tileset.png", sf::Vector2u(32, 32), m_level, 16, 8))
+        std::cerr << "[pbengine] [ERROR] Cannot Load Tilemap Texture\n";
+}
+
 void Engine::BindPlrList(std::vector<Player*> plrlist)
 {
     m_plrlist = plrlist;
@@ -79,6 +91,7 @@ void Engine::Render()
     m_elapsed_global = m_clock_global.getElapsedTime();
     m_clock.restart();
     m_texture->clear();
+    m_texture->draw(m_tilemap);
     for (int i = 0; i < m_plrlist.size(); i++)
         m_texture->draw(*m_plrlist[i]);
     m_texture->draw(m_plr);

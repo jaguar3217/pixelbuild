@@ -1,68 +1,133 @@
+// TODO: Clean the code and then separate the classes into separate files
+
 #include <SFML/Graphics.hpp>
 #include <wx/wx.h>
 
 class wxSFMLCanvas : public wxControl, public sf::RenderWindow
 {
 public:
-    wxSFMLCanvas(wxWindow* Parent = NULL, wxWindowID Id = -1, const wxPoint& Position = wxDefaultPosition,
+    wxSFMLCanvas(wxWindow* Parent = NULL, wxWindowID ID = -1,
+        const wxPoint& Position = wxDefaultPosition,
         const wxSize& Size = wxDefaultSize, long Style = 0);
     virtual ~wxSFMLCanvas();
+
+private:
+    virtual void OnUpdate();
+    void OnIdle(wxIdleEvent&);
+    void OnPaint(wxPaintEvent&);
+    void OnEraseBackground(wxEraseEvent&); // somehow unused
+
+    DECLARE_EVENT_TABLE()
 };
 
-wxSFMLCanvas::wxSFMLCanvas(wxWindow* Parent, wxWindowID Id, const wxPoint& Position, const wxSize& Size, long Style) :
-    wxControl(Parent, Id, Position, Size, Style) {
+BEGIN_EVENT_TABLE(wxSFMLCanvas, wxControl)
+    EVT_IDLE(wxSFMLCanvas::OnIdle)
+    EVT_PAINT(wxSFMLCanvas::OnPaint)
+END_EVENT_TABLE()
+
+void wxSFMLCanvas::OnIdle(wxIdleEvent&)
+{
+    // Send a paint message when the control is idle, to ensure maximum framerate
+    //Refresh();
+}
+
+void wxSFMLCanvas::OnPaint(wxPaintEvent&)
+{
+    // Prepare the control to be repainted
+    wxPaintDC DC(this);
+
+    // Let the derived class do its specific stuff
+    OnUpdate();
+
+    // Display on screen
+    display();
+}
+
+void wxSFMLCanvas::OnUpdate()
+{
+}
+
+wxSFMLCanvas::~wxSFMLCanvas()
+{}
+
+#ifdef __WXGTK__
+#include <gdk/gdkx.h>
+#include <gtk/gtk.h>
+#include <wx/gtk/win_gtk.h>
+#endif
+
+wxSFMLCanvas::wxSFMLCanvas(wxWindow* Parent, wxWindowID Id, const wxPoint& Position,
+    const wxSize& Size, long Style) :
+    wxControl(Parent, Id, Position, Size, Style)
+{
+#ifdef __WXGTK__
+
+    // GTK implementation requires to go deeper to find the
+    // low-level X11 identifier of the widget
+    gtk_widget_realize(m_wxwindow);
+    gtk_widget_set_double_buffered(m_wxwindow, false);
+    GdkWindow* Win = GTK_PIZZA(m_wxwindow)->bin_window;
+    XFlush(GDK_WINDOW_XDISPLAY(Win));
+    sf::RenderWindow::Create(GDK_WINDOW_XWINDOW(Win));
+
+#else
+
+    // Tested under Windows XP only (should work with X11
+    // and other Windows versions - no idea about MacOS)
     sf::RenderWindow::create(GetHandle());
+
+#endif
 }
 
-wxSFMLCanvas::~wxSFMLCanvas() {
-}
-
-class cMain : public wxFrame
+class GamePreview : public wxSFMLCanvas
 {
-    wxButton* m_btn1 = nullptr;
-    wxSFMLCanvas* mycanv = nullptr;
-    wxDECLARE_EVENT_TABLE();
 public:
-    cMain();
-    void onBtnClicked(wxCommandEvent& evt);
+
+    GamePreview(wxWindow* Parent,
+        wxWindowID ID,
+        wxPoint& Position,
+        wxSize& Size,
+        long       Style = 0) :
+        wxSFMLCanvas(Parent, ID, Position, Size, Style)
+    {
+        // do nothing
+    }
+
+private:
+
+    virtual void OnUpdate()
+    {
+        // Clear the view
+        clear(sf::Color(255, 0, 0));
+    }
+
+    sf::Image  myImage;
+    sf::Sprite mySprite;
 };
 
-
-wxBEGIN_EVENT_TABLE(cMain, wxFrame)
-EVT_BUTTON(10001, onBtnClicked)
-wxEND_EVENT_TABLE()
-
-
-cMain::cMain() : wxFrame(nullptr, wxID_ANY, "Window", wxPoint(30, 30), wxSize(800, 600)) {
-    mycanv = new wxSFMLCanvas(this, wxID_ANY, wxPoint(50, 50), wxSize(700, 500));
-    m_btn1 = new wxButton(this, 10001, "button1", wxPoint(10, 10), wxSize(100, 50));
-}
-
-void cMain::onBtnClicked(wxCommandEvent& evt) {
-    sf::CircleShape circ(50.0f);
-    circ.setOrigin(50.0f, 50.0f);
-    circ.setFillColor(sf::Color::Blue);
-    circ.setPosition(350, 250);
-    mycanv->draw(circ);
-    mycanv->display();
-}
-
-class myApp : public wxApp
+class Workspace : public wxFrame
 {
-    cMain* m_Frame1 = nullptr;
 public:
-    myApp();
-    virtual bool OnInit();
+
+    Workspace() :
+        wxFrame(NULL, wxID_ANY, "Pixelbuild Editor", wxDefaultPosition, wxSize(612, 356))
+    {
+        new GamePreview(this, wxID_ANY, wxPoint(50, 50), wxSize(512, 256));
+    }
 };
-wxIMPLEMENT_APP(myApp);
 
-myApp::myApp() {
+class MainApplication : public wxApp
+{
+private:
 
-}
+    virtual bool OnInit()
+    {
+        // Create the main window
+        Workspace* MainFrame = new Workspace;
+        MainFrame->Show();
 
-bool myApp::OnInit() {
-    // Create the main window
-    m_Frame1 = new cMain;
-    m_Frame1->Show();
-    return true;
-}
+        return true;
+    }
+};
+
+IMPLEMENT_APP(MainApplication);

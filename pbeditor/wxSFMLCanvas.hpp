@@ -15,7 +15,7 @@ private:
     virtual void OnUpdate();
     void OnIdle(wxIdleEvent&);
     void OnPaint(wxPaintEvent&);
-    void OnEraseBackground(wxEraseEvent&);
+    void OnEraseBackground(wxEraseEvent&); // somehow unused
 
     DECLARE_EVENT_TABLE()
 };

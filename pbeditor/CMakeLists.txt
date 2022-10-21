@@ -1,10 +1,9 @@
-#file(GLOB pbeditor_SRC
-#	"*.hpp"
-#	"*.cpp"
-#)
+file(GLOB pbeditor_SRC
+	"*.hpp"
+	"*.cpp"
+)
 
-#add_executable(pbeditor ${pbeditor_SRC})
-add_executable(pbeditor MainApplication.cpp)
+add_executable(pbeditor ${pbeditor_SRC})
 target_link_libraries(pbeditor LINK_PUBLIC pbengine)
 target_link_libraries(pbeditor LINK_PRIVATE sfml-system sfml-network)
 

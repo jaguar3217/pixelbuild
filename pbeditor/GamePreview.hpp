@@ -12,9 +12,13 @@ public:
         long       Style = 0) :
         wxSFMLCanvas(Parent, ID, Position, Size, Style)
     {
-        // do nothing
+        // set up the circle
+        circle.setRadius(100.f);
+        circle.setFillColor(sf::Color::Yellow);
     }
 
 private:
     virtual void OnUpdate();
+
+    sf::CircleShape circle;
 };

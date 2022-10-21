@@ -18,12 +18,18 @@ void wxSFMLCanvas::OnPaint(wxPaintEvent&)
     display();
 }
 
+// Here is the code that fixes the flicker. Life is saved.
+void wxSFMLCanvas::OnEraseBackground(wxEraseEvent&)
+{
+}
+
 void wxSFMLCanvas::OnUpdate()
 {
 }
 
 wxSFMLCanvas::~wxSFMLCanvas()
-{}
+{
+}
 
 #ifdef __WXGTK__
 #include <gdk/gdkx.h>
@@ -57,4 +63,5 @@ wxSFMLCanvas::wxSFMLCanvas(wxWindow* Parent, wxWindowID Id, const wxPoint& Posit
 BEGIN_EVENT_TABLE(wxSFMLCanvas, wxControl)
 EVT_IDLE(wxSFMLCanvas::OnIdle)
 EVT_PAINT(wxSFMLCanvas::OnPaint)
+EVT_ERASE_BACKGROUND(wxSFMLCanvas::OnEraseBackground)
 END_EVENT_TABLE()

@@ -6,5 +6,5 @@ void GamePreview::OnUpdate()
     clear(sf::Color(255, 0, 0));
 
     // Draw the circle
-    draw(circle);
+    draw(rectangle);
 }

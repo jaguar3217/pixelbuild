@@ -1,15 +1,23 @@
 #pragma once
 
-#include "GamePreview.hpp"
+#include "GamePanel.hpp"
 
 class Workspace : public wxFrame
 {
 public:
 
     Workspace() :
-        wxFrame(NULL, wxID_ANY, "Pixelbuild Editor", wxDefaultPosition, wxSize(612, 356))
+        wxFrame(NULL, wxID_ANY, "Pixelbuild Editor", wxDefaultPosition, wxDefaultSize)
+        // TODO: Window size should be proportional to GamePanel
     {
-        new GamePreview(this, wxID_ANY, wxPoint(50, 50), wxSize(512, 256));
-        new wxButton(this, 10001, "DmyButton", wxPoint(10, 10), wxSize(100, 50));
+        GamePanel* gp = new GamePanel(this, wxID_ANY, wxPoint(0, 0), wxSize(512, 256));
+
+        wxSizer* sizer = new wxBoxSizer(wxVERTICAL);
+        this->SetSizer(sizer);
+
+        sizer->Add(gp, 1, wxALIGN_CENTER);
+
+        this->SetSizer(sizer);
+        sizer->SetSizeHints(this);
     }
 };

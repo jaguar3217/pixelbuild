@@ -13,12 +13,12 @@ public:
         wxSFMLCanvas(Parent, ID, Position, Size, Style)
     {
         // set up the circle
-        circle.setRadius(100.f);
-        circle.setFillColor(sf::Color::Yellow);
+        rectangle.setSize(sf::Vector2f(512.f, 256.f));
+        rectangle.setFillColor(sf::Color::Yellow);
     }
 
 private:
     virtual void OnUpdate();
 
-    sf::CircleShape circle;
+    sf::RectangleShape rectangle;
 };

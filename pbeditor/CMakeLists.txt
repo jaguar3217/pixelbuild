@@ -14,5 +14,34 @@ target_compile_definitions(pbeditor PUBLIC ${wxWidgets_DEFINITIONS})
 target_compile_options(pbeditor PRIVATE ${wxWidgets_CXX_FLAGS})
 target_link_libraries(pbeditor PUBLIC ${wxWidgets_LIBRARIES})
 
-set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
+FIND_PACKAGE(PkgConfig REQUIRED)
+PKG_CHECK_MODULES(GTK3 REQUIRED gtk+-3.0)
+IF(NOT GTK3_INCLUDE_DIRS)
+    MESSAGE(FATAL_ERROR "Could not find gtk3")
+ENDIF()
+cmake_minimum_required(VERSION 2.6)
+# Use the package PkgConfig to detect GTK+ headers/library files
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK3 REQUIRED gtk+-3.0 gdk-3.0)
+# Setup CMake to use GTK+, tell the compiler where to look for headers
+# and to the linker where to look for libraries
+include_directories(${GTK3_INCLUDE_DIRS})
+link_directories(${GTK3_LIBRARY_DIRS})
+# Add other flags to the compiler
+add_definitions(${GTK3_CFLAGS_OTHER})
+# Link the target to the GTK+ libraries
+target_link_libraries(pbeditor PUBLIC ${GTK3_LIBRARIES})
+include_directories(${GDK_INCLUDE_DIRS})
+link_directories(${GDK_LIBRARY_DIRS})
+# Add other flags to the compiler
+add_definitions(${GDK_CFLAGS_OTHER})
+# Link the target to the GTK+ libraries
+target_link_libraries(pbeditor PUBLIC ${GDK_LIBRARIES})
+
+find_package(X11 REQUIRED)
+add_definitions(-DCMAKE_HAS_X)
+include_directories(${X11_INCLUDE_DIR})
+target_link_libraries(pbeditor PUBLIC ${X11_LIBRARIES})
+
+#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 # for WinMain to work

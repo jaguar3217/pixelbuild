@@ -7,8 +7,8 @@ class GamePanel : public wxPanel
 public:
 	GamePanel(wxWindow* Parent,
         wxWindowID ID,
-        wxPoint& Position,
-        wxSize& Size,
+        wxPoint Position,
+        wxSize Size,
         long       Style = 0) :
         wxPanel(Parent, ID, Position, Size, Style)
 	{

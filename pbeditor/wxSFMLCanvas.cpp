@@ -34,7 +34,7 @@ wxSFMLCanvas::~wxSFMLCanvas()
 #ifdef __WXGTK__
 #include <gdk/gdkx.h>
 #include <gtk/gtk.h>
-#include <wx/gtk/win_gtk.h>
+//#include <wx/gtk/win_gtk.h>
 #endif
 
 wxSFMLCanvas::wxSFMLCanvas(wxWindow* Parent, wxWindowID Id, const wxPoint& Position,
@@ -47,9 +47,12 @@ wxSFMLCanvas::wxSFMLCanvas(wxWindow* Parent, wxWindowID Id, const wxPoint& Posit
     // low-level X11 identifier of the widget
     gtk_widget_realize(m_wxwindow);
     gtk_widget_set_double_buffered(m_wxwindow, false);
-    GdkWindow* Win = GTK_PIZZA(m_wxwindow)->bin_window;
+    /*GdkWindow* Win = GTK_PIZZA(m_wxwindow)->bin_window;
+    XFlush(GDK_WINDOW_XDISPLAY(Win));*/
+    GdkWindow* Win = gtk_widget_get_window((GtkWidget*)GetHandle());
     XFlush(GDK_WINDOW_XDISPLAY(Win));
-    sf::RenderWindow::Create(GDK_WINDOW_XWINDOW(Win));
+
+    sf::RenderWindow::create(GDK_WINDOW_XID(Win));
 
 #else
 

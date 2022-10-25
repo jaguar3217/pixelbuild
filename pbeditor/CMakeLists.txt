@@ -14,12 +14,12 @@ target_compile_definitions(pbeditor PUBLIC ${wxWidgets_DEFINITIONS})
 target_compile_options(pbeditor PRIVATE ${wxWidgets_CXX_FLAGS})
 target_link_libraries(pbeditor PUBLIC ${wxWidgets_LIBRARIES})
 
+IF(NOT WIN32 AND NOT APPLE)
 FIND_PACKAGE(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(GTK3 REQUIRED gtk+-3.0)
 IF(NOT GTK3_INCLUDE_DIRS)
     MESSAGE(FATAL_ERROR "Could not find gtk3")
 ENDIF()
-cmake_minimum_required(VERSION 2.6)
 # Use the package PkgConfig to detect GTK+ headers/library files
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(GTK3 REQUIRED gtk+-3.0 gdk-3.0)
@@ -42,6 +42,8 @@ find_package(X11 REQUIRED)
 add_definitions(-DCMAKE_HAS_X)
 include_directories(${X11_INCLUDE_DIR})
 target_link_libraries(pbeditor PUBLIC ${X11_LIBRARIES})
+ENDIF()
 
-#set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
-# for WinMain to work
+IF(WIN32)
+set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS") # for WinMain to work
+ENDIF()

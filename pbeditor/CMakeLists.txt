@@ -7,7 +7,7 @@ add_executable(pbeditor ${pbeditor_SRC})
 target_link_libraries(pbeditor LINK_PUBLIC pbengine)
 target_link_libraries(pbeditor LINK_PRIVATE sfml-system sfml-network)
 
-find_package(wxWidgets REQUIRED gl core base OPTIONAL_COMPONENTS net)
+find_package(wxWidgets REQUIRED gl core aui base OPTIONAL_COMPONENTS net)
 
 target_include_directories(pbeditor PUBLIC ${wxWidgets_INCLUDE_DIRS})
 target_compile_definitions(pbeditor PUBLIC ${wxWidgets_DEFINITIONS})

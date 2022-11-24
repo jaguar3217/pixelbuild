@@ -7,10 +7,9 @@ class Workspace : public wxFrame
 {
 public:
 	Workspace() :
-		wxFrame(NULL, wxID_ANY, "Pixelbuild Editor", wxDefaultPosition, wxDefaultSize)
+		wxFrame(NULL, wxID_ANY, "Pixelbuild Editor", wxDefaultPosition, wxSize(800, 600))
 	{
-		/*GameWindow* gw = new GameWindow(this, "Untitled Project");
-		gw->Show(true);*/
+		this->SetSize(FromDIP(800), FromDIP(600)); // resize for High DPI screens
 
 		// notify wxAUI which frame to use
 		m_mgr.SetManagedWindow(this);
@@ -44,31 +43,8 @@ public:
 		m_mgr.AddPane(pexp, wxRIGHT, wxT("Project Explorer"));
 		m_mgr.AddPane(prop, wxRIGHT, wxT("Properties"));
 
-		m_mgr.GetPane(tsel).MinSize(FromDIP(200), -1);
-		m_mgr.GetPane(tsel).Fixed();
-		m_mgr.Update();
-		m_mgr.GetPane(tsel).Resizable();
-		m_mgr.Update();
-
-		m_mgr.GetPane(pexp).MinSize(FromDIP(200), -1);
-		m_mgr.GetPane(pexp).Fixed();
-		m_mgr.Update();
-		m_mgr.GetPane(pexp).Resizable();
-		m_mgr.Update();
-
-		m_mgr.GetPane(prop).MinSize(FromDIP(200), -1);
-		m_mgr.GetPane(prop).Fixed();
-		m_mgr.Update();
-		m_mgr.GetPane(prop).Resizable();
-		m_mgr.Update();
-
 		// tell the manager to "commit" all the changes just made
 		m_mgr.Update();
-
-		this->SetSize(FromDIP(800), FromDIP(600)); // to show window title bar on 
-												   // High DPI screens (MSW),
-												   // should ALWAYS be 800x600 by default
-												   // (or High DPI equivalent)
 	}
 
 	~Workspace()

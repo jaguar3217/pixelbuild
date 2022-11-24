@@ -46,4 +46,5 @@ ENDIF()
 
 IF(WIN32)
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS") # for WinMain to work
+set_property(TARGET pbeditor PROPERTY VS_DPI_AWARE "PerMonitor") # for SFML to work
 ENDIF()

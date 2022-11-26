@@ -8,6 +8,7 @@
 int main(int argc, char **argv)
 {
     sf::RenderWindow window(sf::VideoMode(512, 256), "Pixelbuild");
+    bool focused = true;
     sf::RenderTexture texture;
     sf::UdpSocket socket;
     sf::Packet packet;
@@ -43,6 +44,8 @@ int main(int argc, char **argv)
                 }
                 window.close();
             }
+            if (event.type == sf::Event::GainedFocus) focused = true;
+            if (event.type == sf::Event::LostFocus) focused = false;
         }
         sf::Packet s_packet;
         if (socket.receive(s_packet, sender, port) == sf::Socket::Done)
@@ -111,10 +114,10 @@ int main(int argc, char **argv)
             }
         }
         int state; bool keyPressed = false;
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) ||
-            sf::Keyboard::isKeyPressed(sf::Keyboard::A) ||
-            sf::Keyboard::isKeyPressed(sf::Keyboard::S) ||
-            sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+        if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W) ||
+             sf::Keyboard::isKeyPressed(sf::Keyboard::A) ||
+             sf::Keyboard::isKeyPressed(sf::Keyboard::S) ||
+             sf::Keyboard::isKeyPressed(sf::Keyboard::D)) && focused)
         {
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) state = PLAYER_UP;
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) state = PLAYER_LEFT;

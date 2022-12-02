@@ -1,7 +1,9 @@
 #pragma once
 #include "GamePanel.hpp"
+#include "TileSelector.hpp"
 
 #include <wx/aui/aui.h>
+#include <wx/file.h>
 
 class Workspace : public wxFrame
 {
@@ -14,6 +16,9 @@ public:
 		// notify wxAUI which frame to use
 		m_mgr.SetManagedWindow(this);
 
+		// open tileset file
+		level.Open(wxGetCwd() + "/tileset.png");
+
 		// create several UI elements
 		/*wxTextCtrl* gp = new wxTextCtrl(this, -1, _("Main content window"),
 			wxDefaultPosition, wxSize(FromDIP(200), FromDIP(150)),
@@ -25,9 +30,10 @@ public:
 
 		nbook->AddPage(gp, "Untitled Project");
 
-		wxTextCtrl* tsel = new wxTextCtrl(this, -1, _("Tile selection"),
+		/*wxTextCtrl* tsel = new wxTextCtrl(this, -1, _("Tile selection"),
 			wxDefaultPosition, wxSize(FromDIP(200), FromDIP(150)),
-			wxNO_BORDER | wxTE_MULTILINE);
+			wxNO_BORDER | wxTE_MULTILINE);*/
+		TileSelector* tsel = new TileSelector(this);
 
 		wxTextCtrl* pexp = new wxTextCtrl(this, -1, _("Project explorer"),
 			wxDefaultPosition, wxSize(FromDIP(200), FromDIP(150)),
@@ -54,4 +60,6 @@ public:
 
 private:
 	wxAuiManager m_mgr;
+
+	wxFile level;
 };

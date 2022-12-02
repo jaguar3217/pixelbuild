@@ -78,7 +78,7 @@ int main(int argc, char **argv)
             }
             for (int i = 0; i < plrlist.size(); i++)
             {
-                if (plrlist[i]->m_ip == conn_ip || plrlist[i]->m_port == conn_port)
+                if (plrlist[i]->m_ip == conn_ip && plrlist[i]->m_port == conn_port)
                 {
                     switch (cmd)
                     {

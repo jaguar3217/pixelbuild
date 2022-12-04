@@ -26,7 +26,7 @@ public:
 		wxAuiNotebook* nbook = new wxAuiNotebook(this, wxID_ANY, wxDefaultPosition,
 			wxSize(512, 256));
 
-		GamePanel* gp = new GamePanel(nbook, wxID_ANY, wxDefaultPosition, wxSize(512, 256));
+		GamePanel* gp = new GamePanel(nbook, wxID_ANY, wxDefaultPosition, FromPhys(wxSize(512, 256)));
 
 		nbook->AddPage(gp, "Untitled Project");
 

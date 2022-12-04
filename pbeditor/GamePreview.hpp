@@ -13,10 +13,6 @@ public:
         long       Style = 0) :
         wxSFMLCanvas(Parent, ID, Position, Size, Style)
     {
-        // set up the circle
-        rectangle.setSize(sf::Vector2f(512.f, 256.f));
-        rectangle.setFillColor(sf::Color::Yellow);
-
         // set up the texture
         if (!m_texture.create(512, 256, true))
         {
@@ -33,7 +29,6 @@ public:
 private:
     virtual void OnUpdate();
 
-    sf::RectangleShape rectangle;
     sf::RenderTexture m_texture;
     const sf::Texture& engineOut = m_texture.getTexture();
     sf::Sprite m_sprite;

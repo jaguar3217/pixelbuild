@@ -81,36 +81,36 @@ int main(int argc, char **argv)
             {
                 if (plrlist[i]->m_ip == conn_ip && plrlist[i]->m_port == conn_port)
                 {
-                    if (cmd == 1)
+                    switch (cmd)
                     {
+                    case 1: {
                         if (i == 0)
                             plrlist.erase(plrlist.begin());
                         else
                             plrlist.erase(std::next(plrlist.begin(), i));
                         engine.BindPlrList(plrlist);
-                        goto nextStep;
+                        break;
                     }
-                    else if (cmd == 2)
-                    {
+                    case 2: {
                         int x, y;
                         s_packet >> x >> y;
                         plrlist[i]->setPosition(x, y);
-                        goto nextStep;
+                        break;
                     }
-                    else if (cmd == 3)
-                    {
+                    case 3: {
                         int frame;
                         s_packet >> frame;
                         plrlist[i]->increment_frame(frame);
-                        goto nextStep;
+                        break;
                     }
-                    else if (cmd == 4)
-                    {
+                    case 4: {
                         int state;
                         s_packet >> state;
                         plrlist[i]->look(state);
-                        goto nextStep;
+                        break;
                     }
+                    }
+                    break;
                 }
             }
         }

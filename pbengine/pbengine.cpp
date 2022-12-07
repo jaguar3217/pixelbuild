@@ -7,6 +7,10 @@
 Engine::Engine() {
     std::cout << "[pbengine] Starting...\n";
     m_plr.load("plrsheet.png");
+    npc1.load("plrsheet.png");
+    npc2.load("plrsheet.png");
+    npc1.setPosition(40, 40);
+    npc2.setPosition(80, 80);
     std::cout << "[pbengine] Started.\n";
 }
 
@@ -87,13 +91,21 @@ void Engine::Move(int state)
 
 void Engine::Render()
 {
+    int r = 0;
     m_elapsed = m_clock.getElapsedTime();
     m_elapsed_global = m_clock_global.getElapsedTime();
     m_clock.restart();
     m_texture->clear();
     m_texture->draw(m_tilemap);
-    for (int i = 0; i < m_plrlist.size(); i++)
+    m_texture->draw(npc1);
+    m_texture->draw(npc2);
+    for (int i = 0; i < m_plrlist.size(); i++) {
+        //m_plrlist[i]->setPosition(rand() % 512, rand() % 256);
         m_texture->draw(*m_plrlist[i]);
+        r++;
+    }
+    std::cout << "[pbengine] " << r << " players drawn, plrlist size " << m_plrlist.size() << "\n";
     m_texture->draw(m_plr);
     m_texture->display();
+    r = 0;
 }

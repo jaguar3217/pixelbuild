@@ -58,11 +58,12 @@ int main(int argc, char **argv)
             sf::IpAddress conn_ip(conn_ip_int);
             if (cmd == 0)
             {
-                static Player conn;
-                conn.load("plrsheet.png");
-                conn.m_ip = conn_ip;
-                conn.m_port = conn_port;
-                plrlist.push_back(&conn);
+                plrlist.push_back(new Player());
+                Player *conn = plrlist.back();
+                conn->load("plrsheet.png");
+                conn->m_ip = conn_ip;
+                conn->m_port = conn_port;
+                plrlist.push_back(conn);
                 engine.BindPlrList(plrlist);
             }
             if (cmd == 5)
@@ -80,38 +81,44 @@ int main(int argc, char **argv)
             {
                 if (plrlist[i]->m_ip == conn_ip && plrlist[i]->m_port == conn_port)
                 {
-                    switch (cmd)
+                    if (cmd == 1)
                     {
-                    case 1: {
                         if (i == 0)
                             plrlist.erase(plrlist.begin());
                         else
                             plrlist.erase(std::next(plrlist.begin(), i));
                         engine.BindPlrList(plrlist);
-                        break;
+                        goto nextStep;
                     }
-                    case 2: {
+                    else if (cmd == 2)
+                    {
                         int x, y;
                         s_packet >> x >> y;
                         plrlist[i]->setPosition(x, y);
-                        break;
+                        goto nextStep;
                     }
-                    case 3: {
+                    else if (cmd == 3)
+                    {
                         int frame;
                         s_packet >> frame;
                         plrlist[i]->increment_frame(frame);
-                        break;
+                        goto nextStep;
                     }
-                    case 4: {
+                    else if (cmd == 4)
+                    {
                         int state;
                         s_packet >> state;
                         plrlist[i]->look(state);
-                        break;
+                        goto nextStep;
                     }
-                    }
-                    break;
                 }
             }
+        }
+    nextStep:
+        for (int i = 0; i < plrlist.size(); i++)
+        {
+            std::cout << plrlist[i]->getPosition().x << ", " << plrlist[i]->getPosition().y << std::endl;
+            std::cout << plrlist[i]->m_ip << std::endl;
         }
         int state; bool keyPressed = false;
         if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W) ||

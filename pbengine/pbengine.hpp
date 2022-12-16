@@ -27,7 +27,7 @@ private:
     sf::Time m_elapsed_global;
     sf::Clock m_clock;
     sf::Clock m_clock_global;
-    Player m_plr, npc1, npc2;
+    Player m_plr;
     std::vector<Player*> m_plrlist;
     TileMap m_tilemap;
     int m_speed = 100;

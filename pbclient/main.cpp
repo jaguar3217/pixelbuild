@@ -63,7 +63,6 @@ int main(int argc, char **argv)
                 conn->load("plrsheet.png");
                 conn->m_ip = conn_ip;
                 conn->m_port = conn_port;
-                plrlist.push_back(conn);
                 engine.BindPlrList(plrlist);
             }
             if (cmd == 5)
@@ -84,10 +83,7 @@ int main(int argc, char **argv)
                     switch (cmd)
                     {
                     case 1: {
-                        if (i == 0)
-                            plrlist.erase(plrlist.begin());
-                        else
-                            plrlist.erase(std::next(plrlist.begin(), i));
+                        plrlist.erase(plrlist.begin() + i);
                         engine.BindPlrList(plrlist);
                         break;
                     }
@@ -113,12 +109,6 @@ int main(int argc, char **argv)
                     break;
                 }
             }
-        }
-    nextStep:
-        for (int i = 0; i < plrlist.size(); i++)
-        {
-            std::cout << plrlist[i]->getPosition().x << ", " << plrlist[i]->getPosition().y << std::endl;
-            std::cout << plrlist[i]->m_ip << std::endl;
         }
         int state; bool keyPressed = false;
         if ((sf::Keyboard::isKeyPressed(sf::Keyboard::W) ||

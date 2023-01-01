@@ -1,4 +1,9 @@
-add_executable(pbserverd main.cpp)
+file(GLOB pbserverd_SRC
+	"*.hpp"
+	"*.cpp"
+)
+
+add_executable(pbserverd ${pbserverd_SRC})
 
 target_link_libraries(pbserverd LINK_PUBLIC pbengine)
 target_link_libraries(pbserverd LINK_PRIVATE sfml-system sfml-network)

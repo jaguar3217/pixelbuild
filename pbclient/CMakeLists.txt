@@ -1,4 +1,9 @@
-add_executable(pbclient main.cpp)
+file(GLOB pbclient_SRC
+	"*.hpp"
+	"*.cpp"
+)
+
+add_executable(pbclient ${pbclient_SRC})
 
 target_link_libraries(pbclient LINK_PUBLIC pbengine)
 target_link_libraries(pbclient LINK_PRIVATE sfml-graphics sfml-window sfml-system sfml-network)

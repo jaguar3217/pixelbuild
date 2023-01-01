@@ -14,6 +14,7 @@ int main(int argc, char **argv)
     sf::Packet packet;
     sf::IpAddress sender;
     unsigned short port;
+    int packets = 0;
     if (!texture.create(512, 256, true)) // TODO: Replace with non-deprecated method to enable depth buffer
     {
         std::cerr << "[pbclient] Cannot create sf::RenderTexture\n";
@@ -121,25 +122,31 @@ int main(int argc, char **argv)
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) state = PLAYER_DOWN;
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) state = PLAYER_RIGHT;
             engine.Move(state);
-            if (argc == 2)
+            if (argc == 2 && packets > 100)
             {
+                // Send X/Y
                 sf::Packet packet;
                 packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
                 sf::IpAddress recipient = argv[1];
                 socket.send(packet, recipient, 25635);
+
+                // Send State
                 packet.clear();
                 packet << (sf::Int8)4 << state;
                 socket.send(packet, recipient, 25635);
+                packet.clear();
+
+                // Send Frame
+                packet << (sf::Int8)3 << engine.GetFrame();
+                sf::IpAddress recepient = argv[1];
+                socket.send(packet, recepient, 25635);
+                
+                // Reset Packets
+                packets = 0;
             }
+            else
+                packets += 3; // no. of packets (X/Y, state, frame)
             keyPressed = true;
-        }
-        // Send current animation state
-        if (argc == 2 && keyPressed)
-        {
-            sf::Packet packet;
-            packet << (sf::Int8)3 << engine.GetFrame();
-            sf::IpAddress recepient = argv[1];
-            socket.send(packet, recepient, 25635);
         }
         engine.Render();
         const sf::Texture& _texture = texture.getTexture();

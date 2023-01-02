@@ -33,6 +33,12 @@ void addClient(sf::IpAddress sender, unsigned short port)
 			packet << (sf::Int8)4 /* Send State */ << c.ip.toInteger() << c.port << c.state;
 			socket.send(packet, sender, port);
 		}
+
+	// Send Tilemap
+	socket.setBlocking(true);
+	packet.clear(); packet << (sf::Int8)5; socket.send(packet, sender, port);
+	socket.send(level, 128, sender, port);
+	socket.setBlocking(false);
 }
 
 void removeClient(sf::IpAddress sender, unsigned short port)

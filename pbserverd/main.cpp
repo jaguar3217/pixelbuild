@@ -7,6 +7,10 @@
 
 int main()
 {
+	sf::FileInputStream levelFile;
+	if (levelFile.open("main.pblvl"))
+		levelFile.read(level, 128);
+
 	if (socket.bind(25635) != sf::Socket::Done)
 	{
 		std::cerr << "[pbserverd] cannot bind to port 25635 (UDP)\n";

@@ -19,8 +19,6 @@ int main(int argc, char **argv)
     {
         std::cerr << "[pbclient] Cannot create sf::RenderTexture\n";
     }
-    sf::Clock clock;
-    float lastTime = 0;
     Engine engine;
     engine.SetTex(&texture);
     std::vector<Player*> plrlist;
@@ -35,10 +33,6 @@ int main(int argc, char **argv)
         }
     while (window.isOpen())
     {
-        float currentTime = clock.restart().asSeconds();
-        float fps = 1.f / (currentTime - lastTime);
-        lastTime = currentTime;
-
         sf::Event event;
         while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed) {
@@ -128,7 +122,7 @@ int main(int argc, char **argv)
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) state = PLAYER_DOWN;
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) state = PLAYER_RIGHT;
             engine.Move(state);
-            if (argc == 2 && packets > fps)
+            if (argc == 2 && packets > 60)
             {
                 // Send X/Y
                 sf::Packet packet;

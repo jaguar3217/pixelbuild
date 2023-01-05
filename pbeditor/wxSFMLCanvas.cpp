@@ -2,6 +2,12 @@
 
 void wxSFMLCanvas::OnIdle(wxIdleEvent&)
 {
+    // Handle input events
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && mouseInside())
+    {
+        wxMessageBox("LMB clicked.", "Test", wxOK | wxICON_INFORMATION);
+    }
+
     // Send a paint message when the control is idle, to ensure maximum framerate
     Refresh(); // somehow screen flickering, debug build maybe [shrug]
 }
@@ -25,6 +31,7 @@ void wxSFMLCanvas::OnEraseBackground(wxEraseEvent&)
 
 void wxSFMLCanvas::OnUpdate()
 {
+    // Handle to-be-rendered stuff
 }
 
 wxSFMLCanvas::~wxSFMLCanvas()
@@ -61,6 +68,28 @@ wxSFMLCanvas::wxSFMLCanvas(wxWindow* Parent, wxWindowID Id, const wxPoint& Posit
     sf::RenderWindow::create(GetHandle());
 
 #endif
+}
+
+bool wxSFMLCanvas::mouseInside()
+{
+    sf::Vector2i mousePos = sf::Mouse::getPosition();
+    sf::Vector2i canvasPos = this->getPosition();
+    sf::Vector2u canvasSize = this->getSize();
+
+    if (mousePos.x >= canvasPos.x && mousePos.y >= canvasPos.y &&
+        mousePos.x <= (canvasPos.x + canvasSize.x) &&
+        mousePos.y <= (canvasPos.y + canvasSize.y))
+        return true;
+    else
+        return false;
+}
+
+sf::Vector2i wxSFMLCanvas::relativePosition()
+{
+    sf::Vector2i mousePos = sf::Mouse::getPosition();
+    sf::Vector2i canvasPos = this->getPosition();
+
+    return mousePos - canvasPos;
 }
 
 BEGIN_EVENT_TABLE(wxSFMLCanvas, wxControl)

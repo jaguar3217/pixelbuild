@@ -17,7 +17,7 @@ public:
 		m_mgr.SetManagedWindow(this);
 
 		// open tileset file
-		level.Open(wxGetCwd() + "/tileset.png");
+		tileset.Open(wxGetCwd() + "/tileset.png");
 
 		// create several UI elements
 		/*wxTextCtrl* gp = new wxTextCtrl(this, -1, _("Main content window"),
@@ -61,5 +61,5 @@ public:
 private:
 	wxAuiManager m_mgr;
 
-	wxFile level;
+	wxFile tileset;
 };

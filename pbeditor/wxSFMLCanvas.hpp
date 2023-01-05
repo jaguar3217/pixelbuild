@@ -17,5 +17,8 @@ private:
     void OnPaint(wxPaintEvent&);
     void OnEraseBackground(wxEraseEvent&);
 
+    bool mouseInside();
+    sf::Vector2i relativePosition();
+
     DECLARE_EVENT_TABLE()
 };

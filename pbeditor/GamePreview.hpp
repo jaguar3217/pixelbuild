@@ -6,25 +6,11 @@
 class GamePreview : public wxSFMLCanvas
 {
 public:
-    GamePreview(wxWindow* Parent,
-        wxWindowID ID,
-        wxPoint& Position,
-        wxSize& Size,
-        long       Style = 0) :
-        wxSFMLCanvas(Parent, ID, Position, Size, Style)
-    {
-        // set up the texture
-        if (!m_texture.create(512, 256, true))
-        {
-            std::cerr << "[pbeditor] Cannot create sf::RenderTexture\n";
-        }
-
-        // set up the sprite
-        m_sprite.setTexture(engineOut);
-
-        // configure the engine
-        m_engine.SetTex(&m_texture);
-    }
+	GamePreview(wxWindow* Parent,
+		wxWindowID ID,
+		wxPoint& Position,
+		wxSize& Size,
+		long       Style = 0);
 
 private:
     virtual void OnUpdate();

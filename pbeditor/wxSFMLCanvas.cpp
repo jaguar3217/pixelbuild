@@ -3,10 +3,11 @@
 void wxSFMLCanvas::OnIdle(wxIdleEvent&)
 {
     // Handle input events
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && mouseInside())
-    {
-        wxMessageBox("LMB clicked.", "Test", wxOK | wxICON_INFORMATION);
-    }
+	sf::Event event;
+	while (this->pollEvent(event))
+		if (event.type == sf::Event::MouseButtonPressed)
+			if (event.mouseButton.button == sf::Mouse::Left)
+				wxMessageBox(wxString::Format("LMB clicked. Relative position: %d, %d", relativePosition().x, relativePosition().y), "Test", wxOK | wxICON_INFORMATION);
 
     // Send a paint message when the control is idle, to ensure maximum framerate
     Refresh(); // somehow screen flickering, debug build maybe [shrug]

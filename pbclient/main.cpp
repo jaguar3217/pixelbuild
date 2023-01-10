@@ -14,7 +14,9 @@ int main(int argc, char **argv)
     sf::Packet packet;
     sf::IpAddress sender;
     unsigned short port;
+	sf::Clock clock;
     int packets = 0;
+	int packetlimit = 200;
     if (!texture.create(512, 256, true)) // TODO: Replace with non-deprecated method to enable depth buffer
     {
         std::cerr << "[pbclient] Cannot create sf::RenderTexture\n";
@@ -122,27 +124,35 @@ int main(int argc, char **argv)
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) state = PLAYER_DOWN;
             if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) state = PLAYER_RIGHT;
             engine.Move(state);
-            if (argc == 2 && packets > 60)
+            if (argc == 2 && clock.getElapsedTime().asMilliseconds() > 17)
             {
-                // Send X/Y
-                sf::Packet packet;
-                packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
-                sf::IpAddress recipient = argv[1];
-                socket.send(packet, recipient, 25635);
+				if (packets > packetlimit)
+				{
+					// Send X/Y
+					sf::Packet packet;
+					packet << (sf::Int8)2 << engine.GetX() << engine.GetY();
+					sf::IpAddress recipient = argv[1];
+					socket.send(packet, recipient, 25635);
 
-                // Send State
-                packet.clear();
-                packet << (sf::Int8)4 << state;
-                socket.send(packet, recipient, 25635);
-                packet.clear();
+					// Send State
+					packet.clear();
+					packet << (sf::Int8)4 << state;
+					socket.send(packet, recipient, 25635);
+					packet.clear();
 
-                // Send Frame
-                packet << (sf::Int8)3 << engine.GetFrame();
-                sf::IpAddress recepient = argv[1];
-                socket.send(packet, recepient, 25635);
+					// Send Frame
+					packet << (sf::Int8)3 << engine.GetFrame();
+					sf::IpAddress recepient = argv[1];
+					socket.send(packet, recepient, 25635);
+
+					// Reset Packets
+					packets = 0;
+				}
                 
-                // Reset Packets
-                packets = 0;
+                // Reset Packets / Clock
+				//std::cout << "[pbclient] No. of packets: " << std::dec << packets << "; Elapsed Time: " << clock.getElapsedTime().asMilliseconds() << " ms\n";
+				packetlimit = packets;
+				clock.restart();
             }
             else
                 packets += 3; // no. of packets (X/Y, state, frame)

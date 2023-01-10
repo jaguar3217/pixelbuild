@@ -16,7 +16,7 @@ int main(int argc, char **argv)
     unsigned short port;
 	sf::Clock clock;
     int packets = 0;
-	int packetlimit = 200;
+	int packetlimit = 0;
     if (!texture.create(512, 256, true)) // TODO: Replace with non-deprecated method to enable depth buffer
     {
         std::cerr << "[pbclient] Cannot create sf::RenderTexture\n";

@@ -25,7 +25,7 @@ Workspace::Workspace() :
 	/*wxTextCtrl* tsel = new wxTextCtrl(this, -1, _("Tile selection"),
 		wxDefaultPosition, wxSize(FromDIP(200), FromDIP(150)),
 		wxNO_BORDER | wxTE_MULTILINE);*/
-	TileSelector* tsel = new TileSelector(this);
+	TileSelector* tsel = new TileSelector(this, gp);
 
 	wxTextCtrl* pexp = new wxTextCtrl(this, -1, _("Project explorer"),
 		wxDefaultPosition, wxSize(FromDIP(200), FromDIP(150)),

@@ -12,6 +12,11 @@ public:
         long       Style = 0) :
         wxPanel(Parent, ID, Position, Size, Style)
 	{
-        new GamePreview(this, wxID_ANY, Position, Size);
+        m_gp = new GamePreview(this, wxID_ANY, Position, Size);
 	}
+
+	void SetTileToPaint(int tile);
+
+private:
+	GamePreview* m_gp;
 };

@@ -1,4 +1,5 @@
 #include "GamePreview.hpp"
+#include <Windows.h>
 
 GamePreview::GamePreview(wxWindow * Parent, wxWindowID ID, wxPoint & Position, wxSize & Size, long Style) :
 	wxSFMLCanvas(Parent, ID, Position, Size, Style)
@@ -14,16 +15,38 @@ GamePreview::GamePreview(wxWindow * Parent, wxWindowID ID, wxPoint & Position, w
 
 	// configure the engine
 	m_engine.SetTex(&m_texture);
+
+	// load the m_level into the tilemap
+	sf::FileInputStream levelFile;
+	if (levelFile.open("main.pblvl"))
+		levelFile.read(m_level, 128);
+	m_engine.SetLevel(m_level);
+}
+
+void GamePreview::SetTileToPaint(int tile)
+{
+	m_currentTile = tile;
 }
 
 void GamePreview::OnUpdate()
 {
+	// Handle input events
+	sf::Event event;
+	while (this->pollEvent(event))
+		if (event.type == sf::Event::MouseButtonPressed)
+			if (event.mouseButton.button == sf::Mouse::Left)
+			{
+				//wxMessageBox(wxString::Format("LMB clicked. Relative position: %d, %d", relativePosition().x, relativePosition().y), "Test", wxOK | wxICON_INFORMATION);
+				m_level[relativePosition().x / 32 + relativePosition().y / 32 * 16] = m_currentTile;
+				m_engine.SetLevel(m_level);
+			}
+
     // Clear the view
     clear();
 
-    // Render and draw engine output
+    // Render engine output
     m_engine.Render();
 
-    // Draw the circle & engine render output
+    // Draw engine render output
     draw(m_sprite);
 }

@@ -9,6 +9,10 @@ public:
     wxSFMLCanvas(wxWindow* Parent = NULL, wxWindowID ID = -1,
         const wxPoint& Position = wxDefaultPosition,
         const wxSize& Size = wxDefaultSize, long Style = 0);
+
+	bool mouseInside();
+	sf::Vector2i relativePosition();
+
     virtual ~wxSFMLCanvas();
 
 private:
@@ -16,9 +20,6 @@ private:
     void OnIdle(wxIdleEvent&);
     void OnPaint(wxPaintEvent&);
     void OnEraseBackground(wxEraseEvent&);
-
-    bool mouseInside();
-    sf::Vector2i relativePosition();
 
     DECLARE_EVENT_TABLE()
 };

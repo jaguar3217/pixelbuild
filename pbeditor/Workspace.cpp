@@ -27,6 +27,10 @@ Workspace::Workspace() :
 		wxNO_BORDER | wxTE_MULTILINE);*/
 	TileSelector* tsel = new TileSelector(this, gp);
 
+	wxTextCtrl* scn = new wxTextCtrl(this, -1, _("Scene explorer"),
+		wxDefaultPosition, wxSize(FromDIP(400), FromDIP(150)),
+		wxNO_BORDER | wxTE_MULTILINE);
+
 	wxTextCtrl* pexp = new wxTextCtrl(this, -1, _("Project explorer"),
 		wxDefaultPosition, wxSize(FromDIP(200), FromDIP(150)),
 		wxNO_BORDER | wxTE_MULTILINE);
@@ -37,6 +41,7 @@ Workspace::Workspace() :
 
 	// add the panes to the manager
 	m_mgr.AddPane(tsel, wxLEFT, wxT("Tiles"));
+	m_mgr.AddPane(scn, wxLEFT, wxT("Scenes"));
 	m_mgr.AddPane(nbook, wxCENTER);
 	m_mgr.AddPane(pexp, wxRIGHT, wxT("Project Explorer"));
 	m_mgr.AddPane(prop, wxRIGHT, wxT("Properties"));

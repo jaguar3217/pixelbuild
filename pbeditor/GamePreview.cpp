@@ -4,11 +4,17 @@
 GamePreview::GamePreview(wxWindow * Parent, wxWindowID ID, wxPoint & Position, wxSize & Size, long Style) :
 	wxSFMLCanvas(Parent, ID, Position, Size, Style)
 {
+	// set cursor to paintbrush
+	this->SetCursor(wxCursor(wxCURSOR_PAINT_BRUSH));
+
 	// set up the texture
 	if (!m_texture.create(512, 256, true))
 	{
 		std::cerr << "[pbeditor] Cannot create sf::RenderTexture\n";
 	}
+
+	// hide the player
+	m_engine.HidePlayer();
 
 	// set up the sprite
 	m_sprite.setTexture(engineOut);

@@ -16,6 +16,8 @@ public:
     void BindPlrList(std::vector<Player*> plrlist);
     void Move(int state);
     void Speed(int speed);
+	void HidePlayer();
+	void ShowPlayer();
     int GetSpeed();
     int GetX();
     int GetY();
@@ -31,6 +33,7 @@ private:
     std::vector<Player*> m_plrlist;
     TileMap m_tilemap;
     int m_speed = 100;
+	bool m_showPlayer = true;
     char m_level[128];
 };
 #endif

@@ -85,6 +85,16 @@ void Engine::Move(int state)
     m_plr.increment_frame(m_speed / 10 * m_elapsed_global.asSeconds());
 }
 
+void Engine::HidePlayer()
+{
+	m_showPlayer = false;
+}
+
+void Engine::ShowPlayer()
+{
+	m_showPlayer = true;
+}
+
 void Engine::Render()
 {
     int r = 0;
@@ -98,7 +108,8 @@ void Engine::Render()
         m_texture->draw(*m_plrlist[i]);
         r++;
     }
-    m_texture->draw(m_plr);
+    if (m_showPlayer)
+		m_texture->draw(m_plr);
     m_texture->display();
     r = 0;
 }

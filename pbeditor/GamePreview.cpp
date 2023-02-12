@@ -1,5 +1,4 @@
 #include "GamePreview.hpp"
-#include <Windows.h>
 
 GamePreview::GamePreview(wxWindow * Parent, wxWindowID ID, wxPoint & Position, wxSize & Size, long Style) :
 	wxSFMLCanvas(Parent, ID, Position, Size, Style)

@@ -16,6 +16,8 @@ public:
 	}
 
 	void SetTileToPaint(int tile);
+	void OpenNewFile(wxString path);
+	char* GetLevel();
 
 private:
 	GamePreview* m_gp;

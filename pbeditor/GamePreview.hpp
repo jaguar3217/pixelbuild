@@ -13,6 +13,8 @@ public:
 		long       Style = 0);
 
 	void SetTileToPaint(int tile);
+	void OpenNewFile(wxString path);
+	char* GetLevel();
 
 private:
     virtual void OnUpdate();

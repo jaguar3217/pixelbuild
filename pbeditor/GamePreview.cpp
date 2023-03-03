@@ -1,5 +1,4 @@
 #include "GamePreview.hpp"
-#include <Windows.h>
 
 GamePreview::GamePreview(wxWindow * Parent, wxWindowID ID, wxPoint & Position, wxSize & Size, long Style) :
 	wxSFMLCanvas(Parent, ID, Position, Size, Style)
@@ -32,6 +31,19 @@ GamePreview::GamePreview(wxWindow * Parent, wxWindowID ID, wxPoint & Position, w
 void GamePreview::SetTileToPaint(int tile)
 {
 	m_currentTile = tile;
+}
+
+void GamePreview::OpenNewFile(wxString path)
+{
+	sf::FileInputStream levelFile;
+	if (levelFile.open(path.ToStdString()))
+		levelFile.read(m_level, 128);
+	m_engine.SetLevel(m_level);
+}
+
+char* GamePreview::GetLevel()
+{
+	return m_level;
 }
 
 void GamePreview::OnUpdate()

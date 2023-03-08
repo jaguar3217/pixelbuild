@@ -49,15 +49,15 @@ char* GamePreview::GetLevel()
 void GamePreview::OnUpdate()
 {
 	// Handle input events
-	sf::Event event;
-	while (this->pollEvent(event))
-		if (event.type == sf::Event::MouseButtonPressed)
-			if (event.mouseButton.button == sf::Mouse::Left)
-			{
-				//wxMessageBox(wxString::Format("LMB clicked. Relative position: %d, %d", relativePosition().x, relativePosition().y), "Test", wxOK | wxICON_INFORMATION);
-				m_level[relativePosition().x / 32 + relativePosition().y / 32 * 16] = m_currentTile;
-				m_engine.SetLevel(m_level);
-			}
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		if (relativePosition().x < 512 && relativePosition().y < 256 &&
+			relativePosition().x >= 0 && relativePosition().y >= 0)
+		{
+			m_level[relativePosition().x / 32 + relativePosition().y / 32 * 16] = m_currentTile;
+			m_engine.SetLevel(m_level);
+		}
+	}
 
     // Clear the view
     clear();

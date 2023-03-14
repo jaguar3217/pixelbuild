@@ -51,8 +51,7 @@ void GamePreview::OnUpdate()
 	// Handle input events
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
-		if (relativePosition().x < 512 && relativePosition().y < 256 &&
-			relativePosition().x >= 0 && relativePosition().y >= 0)
+		if (mouseInside())
 		{
 			m_level[relativePosition().x / 32 + relativePosition().y / 32 * 16] = m_currentTile;
 			m_engine.SetLevel(m_level);

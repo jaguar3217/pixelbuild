@@ -66,13 +66,8 @@ wxSFMLCanvas::wxSFMLCanvas(wxWindow* Parent, wxWindowID Id, const wxPoint& Posit
 
 bool wxSFMLCanvas::mouseInside()
 {
-    sf::Vector2i mousePos = sf::Mouse::getPosition();
-    sf::Vector2i canvasPos = this->getPosition();
-    sf::Vector2u canvasSize = this->getSize();
-
-    if (mousePos.x >= canvasPos.x && mousePos.y >= canvasPos.y &&
-        mousePos.x <= (canvasPos.x + canvasSize.x) &&
-        mousePos.y <= (canvasPos.y + canvasSize.y))
+    if (relativePosition().x < 512 && relativePosition().y < 256 &&
+			relativePosition().x >= 0 && relativePosition().y >= 0)
         return true;
     else
         return false;
@@ -80,10 +75,9 @@ bool wxSFMLCanvas::mouseInside()
 
 sf::Vector2i wxSFMLCanvas::relativePosition()
 {
-    sf::Vector2i mousePos = sf::Mouse::getPosition();
-    sf::Vector2i canvasPos = this->getPosition();
+    wxPoint mousePos = ScreenToClient(::wxGetMousePosition());
 
-    return mousePos - canvasPos;
+    return sf::Vector2i(mousePos.x, mousePos.y);
 }
 
 BEGIN_EVENT_TABLE(wxSFMLCanvas, wxControl)

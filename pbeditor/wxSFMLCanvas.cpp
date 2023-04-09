@@ -75,9 +75,9 @@ bool wxSFMLCanvas::mouseInside()
 
 sf::Vector2i wxSFMLCanvas::relativePosition()
 {
-    wxPoint mousePos = ScreenToClient(::wxGetMousePosition());
+    wxPoint mousePos = ScreenToClient(FromDIP(::wxGetMousePosition()));
 
-    return sf::Vector2i(FromDIP(mousePos.x), FromDIP(mousePos.y));
+    return sf::Vector2i(mousePos.x, mousePos.y);
 }
 
 BEGIN_EVENT_TABLE(wxSFMLCanvas, wxControl)

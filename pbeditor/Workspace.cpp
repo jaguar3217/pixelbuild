@@ -8,9 +8,9 @@ EVT_MENU(10004, Workspace::OnMenuExit)
 wxEND_EVENT_TABLE()
 
 Workspace::Workspace() :
-	wxFrame(NULL, wxID_ANY, "Pixelbuild Editor", wxDefaultPosition, wxSize(800, 600))
+	wxFrame(NULL, wxID_ANY, "Pixelbuild Editor", wxDefaultPosition, wxSize(1200, 600))
 {
-	this->SetSize(FromDIP(800), FromDIP(600)); // resize for High DPI screens
+	this->SetSize(FromDIP(1200), FromDIP(600)); // resize for High DPI screens
 
 	// Add a menu bar
 	m_MenuBar = new wxMenuBar();

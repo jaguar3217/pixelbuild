@@ -47,7 +47,7 @@ wxSFMLCanvas::wxSFMLCanvas(wxWindow* Parent, wxWindowID Id, const wxPoint& Posit
     // GTK implementation requires to go deeper to find the
     // low-level X11 identifier of the widget
     gtk_widget_realize(m_wxwindow);
-    gtk_widget_set_double_buffered(m_wxwindow, false);
+    gtk_widget_set_double_buffered(m_wxwindow, true);
     /*GdkWindow* Win = GTK_PIZZA(m_wxwindow)->bin_window;
     XFlush(GDK_WINDOW_XDISPLAY(Win));*/
     GdkWindow* Win = gtk_widget_get_window((GtkWidget*)GetHandle());
@@ -77,7 +77,7 @@ sf::Vector2i wxSFMLCanvas::relativePosition()
 {
     wxPoint mousePos = ScreenToClient(::wxGetMousePosition());
 
-    return sf::Vector2i(mousePos.x, mousePos.y);
+    return sf::Vector2i(FromDIP(mousePos.x), FromDIP(mousePos.y));
 }
 
 BEGIN_EVENT_TABLE(wxSFMLCanvas, wxControl)

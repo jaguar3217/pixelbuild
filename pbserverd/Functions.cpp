@@ -101,6 +101,12 @@ void broadcast(sf::IpAddress sender, unsigned short port, sf::Packet packet)
 			socket.send(packet, c.ip, c.port);
 }
 
+void broadcastAll(sf::Packet packet)
+{
+	for (Client & c : clients)
+		socket.send(packet, c.ip, c.port);
+}
+
 //---//
 
 int findElement(sf::IpAddress sender, unsigned short port)

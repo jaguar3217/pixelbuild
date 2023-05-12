@@ -54,6 +54,13 @@ int main()
 			setState(sender, port, state);
 			break;
 		}
+		case 5: { // Recv Chat
+			sf::String msg;
+			packet >> msg;
+			sf::Packet s_packet;
+			s_packet << (sf::Int8)6 << sender.toInteger() << port << msg;
+			broadcastAll(s_packet);
+		}
 		}
 	}
 	return 0;

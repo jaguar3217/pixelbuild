@@ -47,7 +47,7 @@ wxSFMLCanvas::wxSFMLCanvas(wxWindow* Parent, wxWindowID Id, const wxPoint& Posit
     // GTK implementation requires to go deeper to find the
     // low-level X11 identifier of the widget
     gtk_widget_realize(m_wxwindow);
-    gtk_widget_set_double_buffered(m_wxwindow, false);
+    gtk_widget_set_double_buffered(m_wxwindow, true);
     /*GdkWindow* Win = GTK_PIZZA(m_wxwindow)->bin_window;
     XFlush(GDK_WINDOW_XDISPLAY(Win));*/
     GdkWindow* Win = gtk_widget_get_window((GtkWidget*)GetHandle());
@@ -75,7 +75,15 @@ bool wxSFMLCanvas::mouseInside()
 
 sf::Vector2i wxSFMLCanvas::relativePosition()
 {
-    wxPoint mousePos = ScreenToClient(::wxGetMousePosition());
+    //wxPoint mousePos = ::wxGetMousePosition() / GetDPIScaleFactor();
+    wxPoint mousePos;
+#ifdef __WXMAC__
+    mousePos.x = ScreenToClient(::wxGetMousePosition()).x * GetDPIScaleFactor();
+    mousePos.y = ScreenToClient(::wxGetMousePosition()).y * GetDPIScaleFactor();
+#else
+    mousePos.x = ScreenToClient(::wxGetMousePosition()).x;
+    mousePos.y = ScreenToClient(::wxGetMousePosition()).y;
+#endif
 
     return sf::Vector2i(mousePos.x, mousePos.y);
 }

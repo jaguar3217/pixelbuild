@@ -57,16 +57,13 @@ void GamePreview::OnUpdate()
 		{
 			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 			{
-				m_level[relativePosition().x / 32 + relativePosition().y / 32 * 16] = m_currentTile;
+				m_level[(relativePosition().x - m_engine.GetTileMapOffset().x) / 32 + (relativePosition().y - m_engine.GetTileMapOffset().y) / 32 * 16] = m_currentTile;
 				m_engine.SetLevel(m_level);
 			}
-			else
-			{
-				m_engine.MoveTileMap(lmx - relativePosition().x, lmy - relativePosition().y);
-
-				lmx = relativePosition().x;
-				lmy = relativePosition().y;
-			}
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+		{
+			m_engine.MoveTileMap(relativePosition().x - lmx, relativePosition().y - lmy);
 		}
 	}
 
@@ -78,4 +75,8 @@ void GamePreview::OnUpdate()
 
     // Draw engine render output
     draw(m_sprite);
+
+	// Update last mouse position
+	lmx = relativePosition().x;
+	lmy = relativePosition().y;
 }

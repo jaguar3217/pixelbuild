@@ -23,6 +23,7 @@ public:
     int GetX();
     int GetY();
     int GetFrame();
+	sf::Vector2i GetTileMapOffset();
 private:
     sf::RenderTexture* m_texture;
     sf::Texture m_text;

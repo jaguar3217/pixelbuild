@@ -64,6 +64,11 @@ int Engine::GetFrame()
     return m_plr.get_frame();
 }
 
+sf::Vector2i Engine::GetTileMapOffset()
+{
+	return sf::Vector2i(m_tilemap.getPosition());
+}
+
 void Engine::Move(int state)
 {
     m_plr.look(state);

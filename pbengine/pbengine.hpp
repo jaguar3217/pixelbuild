@@ -18,6 +18,7 @@ public:
     void Speed(int speed);
 	void HidePlayer();
 	void ShowPlayer();
+	void MoveTileMap(int ox, int oy);
     int GetSpeed();
     int GetX();
     int GetY();

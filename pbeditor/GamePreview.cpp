@@ -46,6 +46,8 @@ char* GamePreview::GetLevel()
 	return m_level;
 }
 
+int lmx = 0, lmy = 0;
+
 void GamePreview::OnUpdate()
 {
 	// Handle input events
@@ -53,8 +55,18 @@ void GamePreview::OnUpdate()
 	{
 		if (mouseInside())
 		{
-			m_level[relativePosition().x / 32 + relativePosition().y / 32 * 16] = m_currentTile;
-			m_engine.SetLevel(m_level);
+			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+			{
+				m_level[relativePosition().x / 32 + relativePosition().y / 32 * 16] = m_currentTile;
+				m_engine.SetLevel(m_level);
+			}
+			else
+			{
+				m_engine.MoveTileMap(lmx - relativePosition().x, lmy - relativePosition().y);
+
+				lmx = relativePosition().x;
+				lmy = relativePosition().y;
+			}
 		}
 	}
 

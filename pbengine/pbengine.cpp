@@ -95,6 +95,11 @@ void Engine::ShowPlayer()
 	m_showPlayer = true;
 }
 
+void Engine::MoveTileMap(int ox, int oy)
+{
+	m_tilemap.move(ox, oy);
+}
+
 void Engine::Render()
 {
     int r = 0;

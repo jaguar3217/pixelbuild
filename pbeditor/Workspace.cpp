@@ -1,10 +1,12 @@
 #include "Workspace.hpp"
+#include <wx/tokenzr.h>
 
 wxBEGIN_EVENT_TABLE(Workspace, wxFrame)
 EVT_MENU(10001, Workspace::OnMenuNew)
 EVT_MENU(10002, Workspace::OnMenuOpen)
 EVT_MENU(10003, Workspace::OnMenuSave)
 EVT_MENU(10004, Workspace::OnMenuExit)
+EVT_MENU(10005, Workspace::OnMenuSetMapSize)
 wxEND_EVENT_TABLE()
 
 Workspace::Workspace() :
@@ -26,7 +28,14 @@ Workspace::Workspace() :
 	// Add File Menu to Menu Bar
 	m_MenuBar->Append(menuFile, "File");
 
-		// notify wxAUI which frame to use
+	// Add Menu for game operations
+	wxMenu *menuGame = new wxMenu();
+	menuGame->Append(10005, "Set Map Size");
+
+	// Add Game Menu to Menu bar
+	m_MenuBar->Append(menuGame, "Game");
+
+	// notify wxAUI which frame to use
 	m_mgr.SetManagedWindow(this);
 
 	// open tileset file
@@ -109,4 +118,16 @@ void Workspace::OnMenuExit(wxCommandEvent & evt)
 {
 	Close();
 	evt.Skip();
+}
+
+void Workspace::OnMenuSetMapSize(wxCommandEvent & evt)
+{
+	wxTextEntryDialog dlg(this, "Enter with and height seperated by one space:", "Set Map Size");
+	if (dlg.ShowModal() == wxID_OK)
+	{
+		wxStringTokenizer tokenizer(dlg.GetValue(), " ");
+		int width = wxAtoi(tokenizer.GetNextToken());
+		int height = wxAtoi(tokenizer.GetNextToken());
+		m_gp->SetMapSize(width, height);
+	}
 }

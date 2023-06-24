@@ -41,6 +41,18 @@ void GamePreview::OpenNewFile(wxString path)
 	m_engine.SetLevel(m_level);
 }
 
+void GamePreview::SetMapSize(int width, int height)
+{
+	// Transfer to new level with specified coordinates
+	for (int j = 0; j < 8; j++)
+		for (int i = 0; i < 16; i++)
+			if (i >= width || j >= height)
+				m_level[j * 16 + i] = -1;
+
+	// Set new level
+	m_engine.SetLevel(m_level);
+}
+
 char* GamePreview::GetLevel()
 {
 	return m_level;

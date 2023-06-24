@@ -23,6 +23,7 @@ private:
 	void OnMenuOpen(wxCommandEvent &evt);
 	void OnMenuSave(wxCommandEvent &evt);
 	void OnMenuExit(wxCommandEvent &evt);
+	void OnMenuSetMapSize(wxCommandEvent &evt);
 
 	wxDECLARE_EVENT_TABLE();
 };

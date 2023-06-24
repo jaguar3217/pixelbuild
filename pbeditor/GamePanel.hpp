@@ -17,6 +17,7 @@ public:
 
 	void SetTileToPaint(int tile);
 	void OpenNewFile(wxString path);
+	void SetMapSize(int width, int height);
 	char* GetLevel();
 
 private:

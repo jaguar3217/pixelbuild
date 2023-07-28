@@ -19,6 +19,7 @@ public:
 	void HidePlayer();
 	void ShowPlayer();
 	void MoveTileMap(int ox, int oy);
+    void SetMapSize(int width, int height);
     int GetSpeed();
     int GetX();
     int GetY();
@@ -36,6 +37,7 @@ private:
     TileMap m_tilemap;
     int m_speed = 100;
 	bool m_showPlayer = true;
-    char m_level[128];
+    char* m_level;
+    int m_levelW, m_levelH;
 };
 #endif

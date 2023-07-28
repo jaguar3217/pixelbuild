@@ -1,12 +1,16 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <iostream>
+#include <cstring>
 #include <pbengine.hpp>
 #include <Player.hpp>
 
 Engine::Engine() {
     std::cout << "[pbengine] Starting...\n";
     m_plr.load("plrsheet.png");
+    m_level = new char[16 * 8];
+    m_levelW = 16;
+    m_levelH = 8;
     std::cout << "[pbengine] Started.\n";
 }
 
@@ -24,14 +28,22 @@ void Engine::SetTex(sf::RenderTexture* texture)
 
 void Engine::SetLevel(char level[])
 {
-    for (int i = 0; i < 128; i++)
+    for (int i = 0; i < m_levelW * m_levelH; i++)
     {
         std::cout << std::hex << (int)level[i] << ' ';
         m_level[i] = level[i];
     }
 
-    if (!m_tilemap.load("tileset.png", sf::Vector2u(32, 32), m_level, 16, 8))
+    if (!m_tilemap.load("tileset.png", sf::Vector2u(32, 32), m_level, m_levelW, m_levelH))
         std::cerr << "[pbengine] [ERROR] Cannot Load Tilemap Texture\n";
+}
+
+void Engine::SetMapSize(int width, int height)
+{
+    // Set new width & height
+    m_level = new char[width * height];
+    m_levelW = width;
+    m_levelH = height;
 }
 
 void Engine::BindPlrList(std::vector<Player*> plrlist)

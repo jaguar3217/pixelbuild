@@ -3,6 +3,11 @@
 GamePreview::GamePreview(wxWindow * Parent, wxWindowID ID, wxPoint & Position, wxSize & Size, long Style) :
 	wxSFMLCanvas(Parent, ID, Position, Size, Style)
 {
+	// define level variables
+	m_level = new char[16 * 8];
+	m_levelW = 16;
+	m_levelH = 8;
+
 	// set cursor to paintbrush
 	this->SetCursor(wxCursor(wxCURSOR_PAINT_BRUSH));
 
@@ -43,11 +48,30 @@ void GamePreview::OpenNewFile(wxString path)
 
 void GamePreview::SetMapSize(int width, int height)
 {
-	// Transfer to new level with specified coordinates
-	for (int j = 0; j < 8; j++)
-		for (int i = 0; i < 16; i++)
-			if (i >= width || j >= height)
-				m_level[j * 16 + i] = -1;
+	// Tell engine to set map size
+	m_engine.SetMapSize(width, height);
+	
+	// Transfer to old level and reinitalize
+    char oldlevel[m_levelW * m_levelH];
+	for (int i = 0; i < m_levelW * m_levelH; i++)
+	{
+		oldlevel[i] = m_level[i];
+		std::cout << std::hex << (int)oldlevel[i] << ' ';
+	}
+	std::cout << std::endl;
+    m_level = new char[width * height];
+
+    // Transfer to new level with specified coordinates
+	for (int j = 0; j < height; j++)
+		for (int i = 0; i < width; i++)
+			if (i >= m_levelW || j >= m_levelH)
+				m_level[j * width + i] = 1;
+            else
+                m_level[j * width + i] = oldlevel[j * m_levelW + i];
+
+	// Update width & height
+	m_levelW = width;
+	m_levelH = height;
 
 	// Set new level
 	m_engine.SetLevel(m_level);
@@ -69,7 +93,7 @@ void GamePreview::OnUpdate()
 		{
 			if (!sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 			{
-				m_level[(relativePosition().x - m_engine.GetTileMapOffset().x) / 32 + (relativePosition().y - m_engine.GetTileMapOffset().y) / 32 * 16] = m_currentTile;
+				m_level[(relativePosition().x - m_engine.GetTileMapOffset().x) / 32 + (relativePosition().y - m_engine.GetTileMapOffset().y) / 32 * m_levelW] = m_currentTile;
 				m_engine.SetLevel(m_level);
 			}
 		}

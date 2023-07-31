@@ -52,10 +52,11 @@ void GamePreview::SetMapSize(int width, int height)
 	m_engine.SetMapSize(width, height);
 	
 	// Transfer to old level and reinitalize
-    char oldlevel[m_levelW * m_levelH];
+    char* oldlevel = new char[m_levelW * m_levelH];
 	for (int i = 0; i < m_levelW * m_levelH; i++)
 	{
-		oldlevel[i] = m_level[i];
+		int tile = m_level[i];
+		oldlevel[i] = tile;
 		std::cout << std::hex << (int)oldlevel[i] << ' ';
 	}
 	std::cout << std::endl;

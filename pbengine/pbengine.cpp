@@ -94,7 +94,7 @@ void Engine::Move(int state)
             break;
         case PLAYER_LEFT:
             m_plr.move(-m_speed * m_elapsed.asSeconds(), 0);
-            break;
+			break;
         case PLAYER_RIGHT:
             m_plr.move(m_speed * m_elapsed.asSeconds(), 0);
             break;

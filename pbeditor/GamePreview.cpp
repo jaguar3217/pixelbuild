@@ -17,7 +17,7 @@ GamePreview::GamePreview(wxWindow * Parent, wxWindowID ID, wxPoint & Position, w
 		std::cerr << "[pbeditor] Cannot create sf::RenderTexture\n";
 	}
 
-	// hide the player
+	// hide the player & unset view
 	m_engine.HidePlayer();
 
 	// set up the sprite
@@ -28,8 +28,16 @@ GamePreview::GamePreview(wxWindow * Parent, wxWindowID ID, wxPoint & Position, w
 
 	// load the m_level into the tilemap
 	sf::FileInputStream levelFile;
+	char wh[2]; // width and height
 	if (levelFile.open("main.pblvl"))
-		levelFile.read(m_level, 128);
+	{
+		levelFile.read(wh, 2);
+		m_level = new char[wh[0] * wh[1]];
+		levelFile.read(m_level, wh[0] * wh[1]);
+		m_levelW = wh[0];
+		m_levelH = wh[1];
+		m_engine.SetMapSize(wh[0], wh[1]);
+	}
 	m_engine.SetLevel(m_level);
 }
 
@@ -41,8 +49,16 @@ void GamePreview::SetTileToPaint(int tile)
 void GamePreview::OpenNewFile(wxString path)
 {
 	sf::FileInputStream levelFile;
+	char wh[2]; // width and height
 	if (levelFile.open(path.ToStdString()))
-		levelFile.read(m_level, 128);
+	{
+		levelFile.read(wh, 2);
+		m_level = new char[wh[0] * wh[1]];
+		levelFile.read(m_level, wh[0] * wh[1]);
+		m_levelW = wh[0];
+		m_levelH = wh[1];
+		m_engine.SetMapSize(wh[0], wh[1]);
+	}
 	m_engine.SetLevel(m_level);
 }
 
@@ -81,6 +97,16 @@ void GamePreview::SetMapSize(int width, int height)
 char* GamePreview::GetLevel()
 {
 	return m_level;
+}
+
+int GamePreview::GetMapWidth()
+{
+	return m_levelW;
+}
+
+int GamePreview::GetMapHeight()
+{
+	return m_levelH;
 }
 
 int lmx = 0, lmy = 0;

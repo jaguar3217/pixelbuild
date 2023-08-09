@@ -71,12 +71,16 @@ int main(int argc, char **argv)
             if (cmd == 5)
             {
                 std::cout << "[pbclient] Received Five\n";
-                char level[128];
                 socket.setBlocking(true);
                 std::size_t received;
-                if (socket.receive(level, 128, received, sender, port) != sf::Socket::Done)
+				char wh[2];
+				if (socket.receive(wh, 2, received, sender, port) != sf::Socket::Done)
+					std::cerr << "[pbclient] [ERROR] Cannot receive coordinates from server\n";
+				char* level = new char[wh[0] * wh[1]];
+                if (socket.receive(level, wh[0] * wh[1], received, sender, port) != sf::Socket::Done)
                     std::cerr << "[pbclient] [ERROR] Cannot receive tilemap from server\n";
-                engine.SetLevel(level);
+				engine.SetMapSize(wh[0], wh[1]);
+				engine.SetLevel(level);
                 socket.setBlocking(false);
             }
             for (int i = 0; i < plrlist.size(); i++)

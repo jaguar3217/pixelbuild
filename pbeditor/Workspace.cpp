@@ -109,7 +109,11 @@ void Workspace::OnMenuSave(wxCommandEvent & evt)
 	{
 		wxFile file(dlg.GetPath(), wxFile::write);
 		char* level = m_gp->GetLevel();
-		file.Write(level, 16 * 8);
+		int width = m_gp->GetMapWidth();
+		int height = m_gp->GetMapHeight();
+		char wh[2] = { width, height };
+		file.Write(wh, 2);
+		file.Write(level, width * height);
 		file.Close();
 	}
 }

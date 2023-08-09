@@ -16,6 +16,8 @@ public:
 	void OpenNewFile(wxString path);
 	void SetMapSize(int width, int height);
 	char* GetLevel();
+	int GetMapWidth();
+	int GetMapHeight();
 
 private:
     virtual void OnUpdate();

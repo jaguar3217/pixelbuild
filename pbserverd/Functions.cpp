@@ -37,7 +37,9 @@ void addClient(sf::IpAddress sender, unsigned short port)
 	// Send Tilemap
 	socket.setBlocking(true);
 	packet.clear(); packet << (sf::Int8)5; socket.send(packet, sender, port);
-	socket.send(level, 128, sender, port);
+	char wh[2]; wh[0] = levelWidth; wh[1] = levelHeight;
+	socket.send(wh, 2, sender, port);
+	socket.send(level, levelWidth * levelHeight, sender, port);
 	socket.setBlocking(false);
 }
 

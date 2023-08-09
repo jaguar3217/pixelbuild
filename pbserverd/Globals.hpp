@@ -8,4 +8,5 @@ extern std::vector<Client> clients;
 extern sf::Packet packet;
 extern sf::IpAddress sender;
 extern unsigned short port;
-extern char level[128];
+extern char* level;
+extern int levelWidth, levelHeight;

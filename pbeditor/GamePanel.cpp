@@ -19,3 +19,13 @@ char* GamePanel::GetLevel()
 {
 	return m_gp->GetLevel();
 }
+
+int GamePanel::GetMapWidth()
+{
+	return m_gp->GetMapWidth();
+}
+
+int GamePanel::GetMapHeight()
+{
+	return m_gp->GetMapHeight();
+}

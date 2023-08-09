@@ -5,4 +5,5 @@ std::vector<Client> clients;
 sf::Packet packet;
 sf::IpAddress sender;
 unsigned short port;
-char level[128];
+char* level;
+int levelWidth, levelHeight;

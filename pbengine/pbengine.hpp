@@ -23,7 +23,7 @@ public:
     int GetSpeed();
     int GetX();
     int GetY();
-    int GetFrame();
+	int GetFrame();
 	sf::Vector2i GetTileMapOffset();
 private:
     sf::RenderTexture* m_texture;

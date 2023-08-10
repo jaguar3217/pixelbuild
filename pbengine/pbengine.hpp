@@ -18,8 +18,10 @@ public:
     void Speed(int speed);
 	void HidePlayer();
 	void ShowPlayer();
-	void MoveTileMap(int ox, int oy);
+	void MoveView(int ox, int oy);
     void SetMapSize(int width, int height);
+	void SetViewToPlayer();
+	void ResetView();
     int GetSpeed();
     int GetX();
     int GetY();
@@ -27,6 +29,7 @@ public:
 	sf::Vector2i GetTileMapOffset();
 private:
     sf::RenderTexture* m_texture;
+	sf::View m_view;
     sf::Texture m_text;
     sf::Time m_elapsed;
     sf::Time m_elapsed_global;
@@ -37,6 +40,7 @@ private:
     TileMap m_tilemap;
     int m_speed = 100;
 	bool m_showPlayer = true;
+	bool m_viewEnabled = false;
     char* m_level;
     int m_levelW, m_levelH;
 };

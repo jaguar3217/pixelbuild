@@ -33,6 +33,7 @@ int main(int argc, char **argv)
             sf::IpAddress recipient = argv[1];
             socket.send(packet, recipient, 25635);
         }
+	engine.SetViewToPlayer();
     while (window.isOpen())
     {
         sf::Event event;

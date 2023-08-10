@@ -21,6 +21,7 @@ Engine::~Engine() {
 void Engine::SetTex(sf::RenderTexture* texture)
 {
     m_texture = texture;
+	m_view = m_texture->getDefaultView();
     m_texture->clear();
     m_texture->draw(m_plr);
     m_texture->display();
@@ -44,6 +45,20 @@ void Engine::SetMapSize(int width, int height)
     m_level = new char[width * height];
     m_levelW = width;
     m_levelH = height;
+}
+
+void Engine::SetViewToPlayer()
+{
+	m_view.setCenter(m_plr.getPosition().x + 8.f, m_plr.getPosition().y + 8.f);
+	m_texture->setView(m_view);
+	m_viewEnabled = true;
+}
+
+void Engine::ResetView()
+{
+	m_texture->setView(m_texture->getDefaultView());
+	m_view = m_texture->getDefaultView();
+	m_viewEnabled = false;
 }
 
 void Engine::BindPlrList(std::vector<Player*> plrlist)
@@ -88,15 +103,35 @@ void Engine::Move(int state)
     {
         case PLAYER_DOWN:
             m_plr.move(0, m_speed * m_elapsed.asSeconds());
+			if (m_viewEnabled)
+			{
+				m_view.move(0, m_speed * m_elapsed.asSeconds());
+				m_texture->setView(m_view);
+			}
             break;
         case PLAYER_UP:
-            m_plr.move(0, -m_speed * m_elapsed.asSeconds());
+			m_plr.move(0, -m_speed * m_elapsed.asSeconds());
+			if (m_viewEnabled)
+			{
+				m_view.move(0, -m_speed * m_elapsed.asSeconds());
+				m_texture->setView(m_view);
+			}
             break;
         case PLAYER_LEFT:
-            m_plr.move(-m_speed * m_elapsed.asSeconds(), 0);
+			m_plr.move(-m_speed * m_elapsed.asSeconds(), 0);
+			if (m_viewEnabled)
+			{
+				m_view.move(-m_speed * m_elapsed.asSeconds(), 0);
+				m_texture->setView(m_view);
+			}
 			break;
         case PLAYER_RIGHT:
-            m_plr.move(m_speed * m_elapsed.asSeconds(), 0);
+			m_plr.move(m_speed * m_elapsed.asSeconds(), 0);
+			if (m_viewEnabled)
+			{
+				m_view.move(m_speed * m_elapsed.asSeconds(), 0);
+				m_texture->setView(m_view);
+			}
             break;
     }
     m_plr.increment_frame(m_speed / 10 * m_elapsed_global.asSeconds());
@@ -112,9 +147,10 @@ void Engine::ShowPlayer()
 	m_showPlayer = true;
 }
 
-void Engine::MoveTileMap(int ox, int oy)
+void Engine::MoveView(int ox, int oy)
 {
-	m_tilemap.move(ox, oy);
+	m_view.move(-ox, -oy);
+	m_texture->setView(m_view);
 }
 
 void Engine::Render()

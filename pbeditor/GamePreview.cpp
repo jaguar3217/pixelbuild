@@ -126,7 +126,7 @@ void GamePreview::OnUpdate()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 		{
-			m_engine.MoveTileMap(relativePosition().x - lmx, relativePosition().y - lmy);
+			m_engine.MoveView(relativePosition().x - lmx, relativePosition().y - lmy);
 		}
 	}
 

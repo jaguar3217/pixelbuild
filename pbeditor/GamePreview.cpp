@@ -109,12 +109,10 @@ int GamePreview::GetMapHeight()
 	return m_levelH;
 }
 
-int lmx = 0, lmy = 0;
-
 void GamePreview::OnUpdate()
 {
 	// Handle input events
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	if (FindFocus() == this && sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
 		if (mouseInside())
 		{
@@ -126,7 +124,7 @@ void GamePreview::OnUpdate()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
 		{
-			m_engine.MoveView(relativePosition().x - lmx, relativePosition().y - lmy);
+			m_engine.MoveView(relativePosition().x - m_lmx, relativePosition().y - m_lmy);
 		}
 	}
 
@@ -140,6 +138,6 @@ void GamePreview::OnUpdate()
     draw(m_sprite);
 
 	// Update last mouse position
-	lmx = relativePosition().x;
-	lmy = relativePosition().y;
+	m_lmx = relativePosition().x;
+	m_lmy = relativePosition().y;
 }

@@ -87,6 +87,9 @@ void Workspace::OnMenuNew(wxCommandEvent & evt)
 	// Create the main window
 	Workspace* MainFrame = new Workspace;
 	MainFrame->Show();
+
+	// Close current window
+	//Close();
 	
 	evt.Skip();
 }

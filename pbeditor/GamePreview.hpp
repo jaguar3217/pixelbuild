@@ -25,6 +25,7 @@ private:
 	int m_currentTile = 0;
 	char* m_level;
 	int m_levelW, m_levelH;
+	int m_lmx = 0, m_lmy = 0;
 
     sf::RenderTexture m_texture;
     const sf::Texture& engineOut = m_texture.getTexture();

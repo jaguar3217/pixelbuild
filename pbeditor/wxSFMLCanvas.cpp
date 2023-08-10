@@ -75,14 +75,11 @@ bool wxSFMLCanvas::mouseInside()
 
 sf::Vector2i wxSFMLCanvas::relativePosition()
 {
-    //wxPoint mousePos = ::wxGetMousePosition() / GetDPIScaleFactor();
-    wxPoint mousePos;
+    //wxPoint mousePos = ::wxGetMousePosition();
 #ifdef __WXMAC__
-    mousePos.x = ScreenToClient(::wxGetMousePosition()).x * GetDPIScaleFactor();
-    mousePos.y = ScreenToClient(::wxGetMousePosition()).y * GetDPIScaleFactor();
+    wxPoint mousePos = ::wxGetMousePosition() * GetDPIScaleFactor();
 #else
-    mousePos.x = ScreenToClient(::wxGetMousePosition()).x;
-    mousePos.y = ScreenToClient(::wxGetMousePosition()).y;
+    wxPoint mousePos = ::wxGetMousePosition();
 #endif
 
     return sf::Vector2i(mousePos.x, mousePos.y);

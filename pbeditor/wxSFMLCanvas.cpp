@@ -77,9 +77,9 @@ sf::Vector2i wxSFMLCanvas::relativePosition()
 {
     //wxPoint mousePos = ::wxGetMousePosition();
 #ifdef __WXMAC__
-    wxPoint mousePos = ::wxGetMousePosition() * GetDPIScaleFactor();
+    wxPoint mousePos = ScreenToClient(::wxGetMousePosition()) * GetDPIScaleFactor();
 #else
-    wxPoint mousePos = ::wxGetMousePosition();
+    wxPoint mousePos = ScreenToClient(::wxGetMousePosition());
 #endif
 
     return sf::Vector2i(mousePos.x, mousePos.y);

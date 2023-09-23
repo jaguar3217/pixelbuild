@@ -93,7 +93,10 @@ int Engine::GetFrame()
 
 sf::Vector2i Engine::GetTileMapOffset()
 {
-	return sf::Vector2i(m_tilemap.getPosition());
+	sf::Vector2f viewCenter = m_view.getCenter();
+	sf::Vector2f halfExtents = m_view.getSize() / 2.f;
+	sf::Vector2f translation = viewCenter - halfExtents;
+	return sf::Vector2i(-translation);
 }
 
 void Engine::Move(int state)

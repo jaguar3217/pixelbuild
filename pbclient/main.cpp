@@ -27,6 +27,7 @@ int main(int argc, char **argv)
     engine.BindPlrList(plrlist);
     if (argc == 2)
         {
+            engine.ShowChatbox();
             socket.setBlocking(false);
             sf::Packet packet;
             packet << (sf::Int8)0;

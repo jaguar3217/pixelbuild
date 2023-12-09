@@ -150,12 +150,22 @@ void Engine::ShowPlayer()
 	m_showPlayer = true;
 }
 
+void Engine::HideChatbox()
+{
+	m_showChatbox = false;
+}
+
+void Engine::ShowChatbox()
+{
+	m_showChatbox = true;
+}
+
 void Engine::MoveView(int ox, int oy)
 {
 	m_view.move(-ox, -oy);
 	m_texture->setView(m_view);
 }
-
+// :%s/foo/bar/g
 void Engine::Render()
 {
     int r = 0;
@@ -171,6 +181,11 @@ void Engine::Render()
     }
     if (m_showPlayer)
 		m_texture->draw(m_plr);
+    auto tmp = m_texture->getView();
+    m_texture->setView(m_texture->getDefaultView()); 
+    if (m_showChatbox)
+	    m_texture->draw(m_chatbox);
+    m_texture->setView(tmp);
     m_texture->display();
     r = 0;
 }

@@ -1,0 +1,1 @@
+/usr/bin/c++ -g -rdynamic CMakeFiles/pbclient.dir/main.cpp.o -o pbclient  -Wl,-rpath,/home/luchiz/pixelbuild/debug/pbengine:/usr/local/lib ../pbengine/libpbengine.so /usr/local/lib/libsfml-graphics.so.2.6.1 /usr/local/lib/libsfml-window.so.2.6.1 /usr/local/lib/libsfml-network.so.2.6.1 /usr/local/lib/libsfml-system.so.2.6.1 

@@ -4,7 +4,7 @@ Chatbox::Chatbox()
 {
 	m_frame.setSize(sf::Vector2f(198, 105));
 	m_frame.move(8, 8);
-	m_frame.setFillColor(sf::Color(0, 0, 0, 447));
+	m_frame.setFillColor(sf::Color(0, 0, 0, sf::Int8(447)));
 
 	m_font.loadFromFile("/usr/share/fonts/TTF/JetBrainsMono-Regular.ttf");
 

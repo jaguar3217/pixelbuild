@@ -1,0 +1,1 @@
+/usr/bin/c++ -rdynamic CMakeFiles/pbserverd.dir/Server.cpp.o CMakeFiles/pbserverd.dir/main.cpp.o -o pbserverd  -Wl,-rpath,/home/luchiz/pixelbuild/pbeditor/pbengine ../pbengine/libpbengine.so /usr/lib/libsfml-network.so.2.6.1 /usr/lib/libsfml-graphics.so.2.6.1 /usr/lib/libsfml-window.so.2.6.1 /usr/lib/libsfml-system.so.2.6.1
